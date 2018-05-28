@@ -39,12 +39,13 @@ if (!isset($_SESSION["id_usuario"])) {
             
         </script>
         <?php
-        if($_SESSION['tipo'] != 2){?>
+        //Usuario FIC
+        if($_SESSION['tipo'] == 1){?>
             <script>
                 mostrarIndex(2);
             </script>;
         <?php
-            }else{?>
+            }else if($_SESSION['tipo'] == 2){ ?>
             <script>
                 mostrarIndex(1);
             </script>

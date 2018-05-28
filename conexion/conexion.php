@@ -1,5 +1,4 @@
 <?php
-//ndskajfs
 define('DB_HOST', '192.168.0.31');
 define('DB_USER', 'repost');
 define('DB_PASSWORD', '');

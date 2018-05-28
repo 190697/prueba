@@ -10,8 +10,10 @@ function mostrarIndex(index) {
                 $("#nav").html(data);
             });
     $destino = "vista/inicio.php";
-    if(index!=1){
+    if(index==1){
         $destino = "vista/ventas/venta.php";
+    }else if(index==2){
+        $destino = "vista/grupo/grupos.php";
     }
     $.post($destino)
             .done(function (data) {
@@ -22,6 +24,7 @@ function mostrarIndex(index) {
 function modal(boton) {
     $destino = boton.dataset.value;
     $("#modal").empty();
+    console.log($destino);
     $.post($destino)
             .done(function (data) {
                 $("#modal").html(data);
