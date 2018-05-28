@@ -24,6 +24,19 @@ session_start();
     <?php
     }
     ?>
+    <?php if ($_SESSION['tipo'] == 1 || $_SESSION['tipo'] == 2) { ?>
+        <li>
+            <a href=javascript:void(0) id="1" class='editar' onclick="navContent('hotel/hotel')">Hoteles&nbsp;&nbsp;<i class="fa fa-building-o"></i></a>
+        </li>
+        <li>
+            <a href=javascript:void(0) id="1" class='editar' data-value="vista/restaurant/restaurant.php" onclick="modal(this)">Restaurantes&nbsp;&nbsp;<i class="fa fa-coffee"></i></a>
+        </li>
+        <li>
+            <a href=javascript:void(0) id="1" class='editar' data-value="vista/disciplinas/disciplina.php" onclick="modal(this)">Disciplinas&nbsp;&nbsp;<i class="fa fa-cubes"></i></a>
+        </li>
+        <?php
+    }
+    ?>
     <!--<li>
         <a href="#" id="acot" onclick="navContent('cotizacion/cotizacion')">Cotizaciones&nbsp;&nbsp;<i class="fa fa-calculator"></i></a>
     </li>-->

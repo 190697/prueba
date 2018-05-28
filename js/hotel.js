@@ -82,6 +82,13 @@ function editarHotel(boton) {
     modal3($destino,$idHotel,i);
 }
 
+function habitacionesHotel(boton) {
+    var i = boton.parentNode.parentNode.rowIndex;
+    $idHotel = boton.id;
+    $destino = "vista/hotel/form_habitacion.php";
+    modal3($destino,$idHotel,i);
+}
+
 /*-----------------Eliminar Empresa-------------------------*/
 function eliminarHotel(boton) {
     $idHotel = boton.id;

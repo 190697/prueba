@@ -32,6 +32,12 @@ class ControladorHotel extends Conexion{
         return $this->consultas($consulta);
     }
     
+    public function listarHabitaciones($idHotel) {
+        $empresas=array();
+        $consulta=$this->_db->prepare("select * from tipoHabitacion where idHotel=$idHotel");
+        return $this->consultas($consulta);
+    }
+    
     public function listarGiros() {
         $datos=array();
         $consulta=$this->_db->prepare("select * from giro where estatus=1");
@@ -41,8 +47,12 @@ class ControladorHotel extends Conexion{
     public function consultas($consulta){
         $consulta->execute();
         $result=$consulta->fetchAll();
-        foreach ($result as $row){
-            $datos[]=$row;
+        if(!$result){
+            return null;
+        }else{
+            foreach ($result as $row){
+                $datos[]=$row;
+            }
         }
         return $datos;
     }
