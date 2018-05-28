@@ -1,9 +1,9 @@
 <?php
-
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
+//ndskajfs
+define('DB_HOST', '192.168.0.31');
+define('DB_USER', 'repost');
 define('DB_PASSWORD', '');
-define('DB_NAME', 'sectur');
+define('DB_NAME', 'repost');
 define('DB_CHARSET', 'utf-8');
 define('DB_PORT',3306);
 
