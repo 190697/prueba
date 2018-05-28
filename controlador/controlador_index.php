@@ -79,7 +79,7 @@ class ControladorIndex extends Conexion {
         $usuario = addslashes(htmlspecialchars($_POST["usrname"]));
         $contra = addslashes(htmlspecialchars($_POST["psw"]));
         $contrasena = sha1($contra);
-        $statement = $this->_db->prepare("select * from usuario where usuario='" . $usuario . "' and contrasenhia='" . $contrasena . "' and estatus=1");
+        $statement = $this->_db->prepare("select * from login where usuario='" . $usuario . "' and contrasenhia='" . $contrasena . "' and estatus=1");
         $statement->execute();
         $result = $statement->fetchAll();
         if (!$result) {
@@ -88,7 +88,7 @@ class ControladorIndex extends Conexion {
             foreach ($result as $row):
                 $id_usuario = $row["idUsuario"];
                 $tipo = $row["tipo"];
-                $nombre = $row["nombreUsuario"];
+                $nombre = $row["usuario"];
             endforeach;
             session_start();
             $_SESSION['id_usuario'] = $id_usuario;
