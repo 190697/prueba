@@ -19,15 +19,22 @@ $consulta = $controladorMeta->buscarMetaActual();
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="./index.php">Inicio</a></li>
-                <?php if ($_SESSION['tipo'] == 9) { ?>
+                <?php if ($_SESSION['tipo'] == 1 || $_SESSION['tipo'] == 2) { ?>
                     <li>
                         <a href=javascript:void(0) id="1" class='editar' data-value="vista/hotel/hotel.php" onclick="modal(this)">Hoteles</a>
                     </li>
                     <li>
-                        <a href=javascript:void(0) id="amonto" class='editar' data-value="vista/monto_meta/monto_meta.php" onclick="modal(this)">Recurso</a>
+                        <a href=javascript:void(0) id="1" class='editar' data-value="vista/hotel/hotel.php" onclick="modal(this)">Restaurantes</a>
                     </li>
                     <li>
                         <a href=javascript:void(0) id="1" class='editar' data-value="vista/disciplinas/disciplina.php" onclick="modal(this)">Disciplinas</a>
+                    </li>
+                    <?php
+                }
+                ?>
+                    <?php if ($_SESSION['tipo'] == 3 || $_SESSION['tipo'] == 2) { ?>
+                    <li>
+                        <a href=javascript:void(0) id="amonto" class='editar' data-value="vista/monto_meta/monto_meta.php" onclick="modal(this)">Recurso</a>
                     </li>
                     <?php
                 }
