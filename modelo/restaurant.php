@@ -8,7 +8,16 @@ class Restaurant {
 
     private $idRestaurant;
     private $nombre;
+    private $correo;
     private $estatus;
+    
+    function getCorreo() {
+        return $this->correo;
+    }
+
+    function setCorreo($correo) {
+        $this->correo = $correo;
+    }
     
     function getIdRestaurant() {
         return $this->idRestaurant;

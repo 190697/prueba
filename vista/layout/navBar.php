@@ -24,7 +24,7 @@ $consulta = $controladorMeta->buscarMetaActual();
                         <a href=javascript:void(0) id="1" class='editar' data-value="vista/hotel/hotel.php" onclick="modal(this)">Hoteles</a>
                     </li>
                     <li>
-                        <a href=javascript:void(0) id="1" class='editar' data-value="vista/hotel/hotel.php" onclick="modal(this)">Restaurantes</a>
+                        <a href=javascript:void(0) id="1" class='editar' data-value="vista/restaurant/restaurant.php" onclick="modal(this)">Restaurantes</a>
                     </li>
                     <li>
                         <a href=javascript:void(0) id="1" class='editar' data-value="vista/disciplinas/disciplina.php" onclick="modal(this)">Disciplinas</a>
