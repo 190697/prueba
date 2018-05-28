@@ -1,4 +1,5 @@
 <?php
+//Hola
 include ($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_index.php');
 require_once('./grupo/paises.php');
 $usuarios=array("Prensa","Invitados especiales","Grupos artísticos","Comité organizador del festival","Técnicos","Personal de apoyo");
