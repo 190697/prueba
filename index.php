@@ -39,7 +39,7 @@ if (!isset($_SESSION["id_usuario"])) {
             
         </script>
         <?php
-        if($_SESSION['tipo'] != 9){?>
+        if($_SESSION['tipo'] != 2){?>
             <script>
                 mostrarIndex(2);
             </script>;

@@ -2,7 +2,7 @@
 
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
-require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/meta.php');
+require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/presupuesto.php');
 
 class ControladorMeta extends Conexion {
 
@@ -10,7 +10,7 @@ class ControladorMeta extends Conexion {
 
     public function __construct() {
         parent::__construct();
-        $this->model = new Montometa();
+        $this->model = new Presupuesto();
     }
 
     //-------------------Encuestas----------------------------
