@@ -28,6 +28,11 @@ $model = $controladorHotel->indexHotel($idHotel);
                         <b>Nombre:</b>
                         <input class="form-control" type="text" id="txtNombreHotel" name="txtNombreHotel" value="<?= $model->getNombre() ?>" placeholder="Nombre del hotel">
                     </div>
+                    <div class="form-group text-center">
+                        <b>Correo:</b>
+                        <input class="form-control" type="text" id="txtCorreoHotel" name="txtCorreoHotel" value="<?= $model->getCorreo() ?>" placeholder="Correo de hotel">
+                        <div id="xmail" class="hide"><h5 class="text-danger">Ingresa un email valido</h5></div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

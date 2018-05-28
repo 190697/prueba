@@ -33,8 +33,8 @@ function modal3($destino,$id,$editar) {
 }
 
 
-function tablaHotel($id, $nombre) {
-    var fila = "<tr><td>" + $nombre + "</td><td><a href=javascript:void(0) id=" + $id +
+function tablaHotel($id, $nombre,$correo) {
+    var fila = "<tr><td>" + $nombre + "</td><td>" + $correo + "</td><td><a href=javascript:void(0) id=" + $id +
             " class='editar' onclick='editarHotel(this)'><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>\n\
             <td><a href=# class='eliminar' id=" + $id + " style='color:#FF0000;' onclick='eliminarHotel(this)'><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td><tr>";
     $('#TablaEmpresas tr:last').after(fila);
@@ -45,17 +45,18 @@ function tablaHotel($id, $nombre) {
 function insertarHotel() {    
     $idHotel = $("#txtIdHotel").val();
     $nombre = $("#txtNombreHotel").val();
+    $correo = $("#txtCorreoHotel").val();
     $editar = $("#txtEditarHotel").val();
     if (!$idHotel)$idHotel = 0;
     var url = "./ajax/ajax_hotel.php";
-    if ($nombre.length < 1) {
+    if (!caracteresCorreoValido($correo, '#xmail') || $nombre.length < 1) {
         swal("Error!", "Se debe de llenar todos los campos.", "warning");
         $("#txtNombreHotel").focus();
     } else {
         $.ajax({
             url: url,
             type: 'post',
-            data: {accion: 1, idHotel:$idHotel,nombre: $nombre},
+            data: {accion: 1, idHotel:$idHotel,nombre: $nombre, correo:$correo},
             success: function (response) {
                 var datos = JSON.parse(response);
                 if (datos.estado != 0) {
@@ -64,7 +65,7 @@ function insertarHotel() {
                     if($editar>0){
                         document.getElementById("TablaEmpresas").deleteRow($editar);
                     }
-                    tablaHotel($idHotel, $nombre);
+                    tablaHotel($idHotel, $nombre,$correo);
                     swal("Exito!", "El registro se almaceno correctamente.", "success");
                 } else {
                     swal("Error!", "Error al intentar crear la empresa.\nVerifique sus datos!", "warning");
@@ -112,4 +113,24 @@ function eliminarHotel(boton) {
                 }
             });
         });
+}
+
+$(document).ready(function () {
+    $("#txtCorreoHotel").blur(function () {
+        caracteresCorreoValido($(this).val(), '#xmail');
+    });
+});
+
+function caracteresCorreoValido(email, div) {
+    console.log(email);
+    var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    if (caract.test(email) == false) {
+        $(div).hide().removeClass('hide').slideDown('slow');
+
+        return false;
+    } else {
+        $(div).hide().addClass('hide').slideDown('slow');
+//        $(div).html('');
+        return true;
+    }
 }

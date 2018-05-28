@@ -28,6 +28,7 @@ $consulta1 = $controlHoteles->listarHoteles();
                                         <th>Nombre</th>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,6 +38,7 @@ $consulta1 = $controlHoteles->listarHoteles();
                                             ?>
                                             <tr> 
                                                 <td><?= $row['nombre']; ?></td>
+                                                <td><?= $row['correo']; ?></td>
                                                 <td><a href=javascript:void(0) id="<?= $row['idHotel'] ?>" class='editar' onclick="editarHotel(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
                                                 <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idHotel'] ?>" style='color:#FF0000;' onclick="eliminarHotel(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
                                                 <!--

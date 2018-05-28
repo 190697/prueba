@@ -12,6 +12,7 @@ switch ($accion) {
     case 1 :
         $model ->setIdHotel($_POST["idHotel"]);
         $model ->setNombre($_POST["nombre"]) ;
+        $model ->setCorreo($_POST["correo"]) ;
         $controlador->insertarHotel($model);
         break;
     

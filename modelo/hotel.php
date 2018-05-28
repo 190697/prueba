@@ -9,7 +9,16 @@ class Hotel {
     private $idHotel;
     private $nombre;
     private $estatus;
+    private $correo;
     
+    function getCorreo() {
+        return $this->correo;
+    }
+
+    function setCorreo($correo) {
+        $this->correo = $correo;
+    }
+  
     function getIdHotel() {
         return $this->idHotel;
     }

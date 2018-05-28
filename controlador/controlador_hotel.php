@@ -19,6 +19,7 @@ class ControladorHotel extends Conexion{
             foreach ($result as $row) {
                 $this->model->setIdHotel($row["idHotel"]);
                 $this->model->setNombre($row["nombre"]);
+                $this->model->setCorreo($row["correo"]);
                 $this->model->setEstatus($row["estatus"]);
             }
         }
@@ -52,9 +53,10 @@ class ControladorHotel extends Conexion{
             $this->model = $model;
             $id_hotel = $this->model->getIdHotel();
             $nombre = $this->model->getNombre();
-            $query = $this->_db->prepare("insert into hotel values(null,'$nombre',1)");
+            $correo = $this->model->getCorreo();
+            $query = $this->_db->prepare("insert into hotel values(null,'$nombre','$correo',1)");
             if ($id_hotel > 0) {
-                $query = $this->_db->prepare("update hotel set nombre='$nombre' where idHotel=$id_hotel");
+                $query = $this->_db->prepare("update hotel set nombre='$nombre',correo='$correo' where idHotel=$id_hotel");
             }
             if ($query->execute()) {
                 $data['estado'] = 1;
