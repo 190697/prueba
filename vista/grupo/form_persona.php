@@ -15,14 +15,14 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-center"><font color="white">Registrar/editar participantes</font></h4>
+                <h4 class="modal-title text-center"><font color="white">REGISTRAR RELACIÓN ANFITRION - GRUPO</font></h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#anfitrion">REGISTRAR RELACIÓN ANFITRION - GRUPO</a></li>
+                    <li class="active"><a data-toggle="tab" href="#anfitrion">REGISTRAR ANFITRION</a></li>
                     <li><a data-toggle="tab" href="#grupo">ASIGNAR GRUPO A ANFITRIÓN</a></li>
                 </ul>
-                <form role="form" id="formGroup" id="accion" name="accion" value="1">
+                <form role="form" id="formGroup" method="post" id="accion" name="accion" value="1">
                     <input type="hidden" id="accion" name="accion" value="1"/>
                     <div class="tab-content">
                         <div id="anfitrion"  class="tab-pane fade in active">
@@ -33,17 +33,20 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                             <h4>Información de anfitrión</h4>
                                             <hr>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Nombre:</b>
-                                            <input class="form-control"id="txtNombreP" name="txtNombreP" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/><span id="spa" name="spa"></span>
+                                        <b>Nombre:</b>
+                                        <div class="input-group">
+                                            <input class="form-control"id="txtNombreP" name="txtNombreP" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
+                                            <span class="input-group-addon"  id="txtNombrePEsp"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Apellidos:</b>
+                                        <b>Apellidos:</b>
+                                        <div class="input-group">
                                             <input class="form-control" id="txtApP" name="txtApP" type="text" onblur="validarInput(this)"  placeholder="Apellido de participante" />
+                                            <span class="input-group-addon"  id="txtApPEsp"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Correo:</b>
+                                        <b>Correo:</b>
+                                        <div class="input-group">
                                             <input class="form-control" id="txtCorreP" name="txtCorreP" onblur="validarInput(this)" type="text" placeholder="Correo de participante" />
+                                            <span class="input-group-addon"  id="txtCorrePEsp"></span>
                                         </div>
                                         <!---->
                                     </div>
@@ -51,7 +54,6 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                             </div>
                         </div>
                         <div id="grupo"  class="tab-pane fade">
-                            <input type="hidden" id="idCotizacion" name="idCotizacion" value="<?= $model[0]["idAnfitrion"] ?>"/>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="col-md-12">
@@ -59,21 +61,25 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                             <h4>Información de grupo</h4>
                                             <hr>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Nombre de grupo:</b>
+                                        <b>Nombre de grupo:</b>
+                                        <div class="input-group">
                                             <input class="form-control"id="txtNombreG" onblur="validarInput(this)" name="txtNombreG" type="text" placeholder="Nombre de grupo" />
+                                            <span class="input-group-addon"  id="txtNombreGEsp"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Clave:</b>
+                                        <b>Clave:</b>
+                                        <div class="input-group">
                                             <input class="form-control" id="txtClave" onblur="validarInput(this)" name="txtClave" type="text"  placeholder="Clave de grupo" />
+                                            <span class="input-group-addon"  id="txtClaveEsp"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Folio:</b>
+                                        <b>Folio:</b>
+                                        <div class="input-group">
                                             <input class="form-control" id="txtFolio" name="txtFolio" onblur="validarInput(this)" type="text" placeholder="Folio de grupo" />
+                                            <span class="input-group-addon"  id="txtFolioEsp"></span>
                                         </div>
-                                        <div class="form-group">
-                                            <b>Número de personas:</b>
+                                        <b>Número de personas:</b>
+                                        <div class="input-group">
                                             <input class="form-control" id="txtNumP" name="txtNumP" onblur="validarInput(this)" type="number" placeholder="Número de personas" />
+                                            <span class="input-group-addon"  id="txtNumPEsp"></span>
                                         </div>
                                         <div class="form-group">
                                             <b>Seleccionar disciplina de grupo</b>
@@ -88,7 +94,7 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                                         <?php
                                                     }
                                                     ?>
-                                                    <?php endforeach ?> 
+                                                <?php endforeach ?> 
                                             </select>
                                         </div>
                                         <!---->

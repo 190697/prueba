@@ -24,14 +24,9 @@ if ($lista_disciplinas) {
         <input class="form-control" id="myInput" type="text" placeholder="Filtrar grupo por cualquier columna..">
     </div>
     <br><br>
-    <div align="center" class="col-md-6">
-        <a href=javascript:void(0) class="btn btn-info" data-value="vista/grupo/form_grupo.php" onclick="modal(this)">
-            <i class="fa fa-plus" aria-hidden="true"></i> Agregar nuevo grupo
-        </a>
-    </div>
-    <div align="center" class="col-md-6">
+    <div align="center" class="col-md-12">
         <a href=javascript:void(0) class="btn btn-success" data-value="vista/grupo/form_persona.php" onclick="modal(this)">
-                <i class="fa fa-plus" aria-hidden="true"></i> Agregar participante
+                <i class="fa fa-plus" aria-hidden="true"></i> Agregar anfitrion - grupo
             </a>
     </div>
     <br><br>

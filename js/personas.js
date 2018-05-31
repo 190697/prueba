@@ -52,13 +52,15 @@ function insertarPersona() {
         });
         }
         
-        function validarInput(boton){
+        function validarInput(boton,spa){
             $id=boton.id;
+            $idS=spa;
             if($("#"+$id).val().length == 0){
                 $("#"+$id).css("border-color","red");
 
-                /*$("#spa").html("<span>no</span>");*/
+                $("#"+$id+"Esp").html("<span><img src='./images/incorrect.png' width='10' height='10'></span>");
             }else{
+                $("#"+$id+"Esp").html("<span><img src='./images/correct.png' width='10' height='10'></span>");
                $("#"+$id).css("border-color","green");
             }
         }
