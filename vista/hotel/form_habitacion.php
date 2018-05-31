@@ -29,7 +29,7 @@ $consulta1 = $controlHoteles->listarHabitaciones($idHotel);
                     <a href="javascript:void(0)" onclick="mostrarTipoHabitacion(2)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</a><br><br>
                 </div>
                 <div id="habitacionesDiv" class="table table-responsive ">
-                    <table id="TablaEmpresas" class="table table-condensed table-striped">
+                    <table id="TablaHabitaciones" class="table table-condensed table-striped">
                         <thead>
                             <tr class="info">
                                 <th>Habitación</th>
@@ -44,15 +44,10 @@ $consulta1 = $controlHoteles->listarHabitaciones($idHotel);
                                 foreach ($consulta1 as $row):
                                     ?>
                                     <tr> 
-                                        <td><?= $row['nombre']; ?></td>
-                                        <td><?= $row['correo']; ?></td>
-                                        <td>
-                                            <a href=javascript:void(0) id="<?= $row['idHotel'] ?>" class='editar' onclick="editarHotel(this)">
-                                                <i class='fa fa-home' aria-hidden=true>&nbsp;&nbsp;Habitaciones</i>
-                                            </a>
-                                        </td>
-                                        <td><a href=javascript:void(0) id="<?= $row['idHotel'] ?>" class='editar' onclick="editarHotel(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
-                                        <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idHotel'] ?>" style='color:#FF0000;' onclick="eliminarHotel(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
+                                        <td><?= $row['nombTipo']; ?></td>
+                                        <td>$<?= number_format($row['costo'],2); ?></td>
+                                        <td><a href=javascript:void(0) id="<?= $row['idTipoHab'] ?>" class='editar' onclick="editarHotel(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
+                                        <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idTipoHab'] ?>" style='color:#FF0000;' onclick="eliminarHabitacion(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
                                         <!--
                                         <td><?php // echo $row['estatus'];      ?></td>
                                         -->
@@ -79,6 +74,7 @@ $consulta1 = $controlHoteles->listarHabitaciones($idHotel);
                 <form id="nuevaHabitacion" style="display: none;">
                     <input type="hidden" id="accion" name="accion" value="3"/>
                     <input type="hidden" id="txtEditarHabitacion" name="txtEditarHabitacion" value="0">
+                    <input type="hidden" id="txtIdHotel" name="txtIdHotel" value="<?=$idHotel?>">
                     <input type="hidden" id="txtIdHabitacion" name="txtIdHabitacion" value="0">
                     <div class="form-group">
                         <label for="usrname"><span class="fa fa-home"></span> Habitación</label>

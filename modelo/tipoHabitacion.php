@@ -2,15 +2,24 @@
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/hotel.php');
 class TipoHabitacion{
     private $idTipohab;
-    private $hotel;
+    public $hotel;
     private $nombTipo;
     private $costo;
+    private $estatus;
     
     function __construct() {
         $this->hotel = new Hotel();
     }
 
-    
+    function getEstatus() {
+        return $this->estatus;
+    }
+
+    function setEstatus($estatus) {
+        $this->estatus = $estatus;
+    }
+
+        
     function getIdTipohab() {
         return $this->idTipohab;
     }

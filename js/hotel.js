@@ -40,13 +40,19 @@ function tablaHotel($id, $nombre,$correo) {
     $('#TablaEmpresas tr:last').after(fila);
 }
 
+function tablaHabitacion($id, $nombre,$costo) {
+    var fila = "<tr><td>" + $nombre + "</td><td>" + $costo + "</td><td><a href=javascript:void(0) id=" + $id +
+            " class='editar' onclick='editarHotel(this)'><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>\n\
+            <td><a href=# class='eliminar' id=" + $id + " style='color:#FF0000;' onclick='eliminarHabitacion(this)'><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td><tr>";
+    $('#TablaHabitaciones tr:last').after(fila);
+}
 /*----------------------------------------------Modulo hotel----------------------------------------------*/
 /*-----------------Insertar y/o editar hotel-------------------------*/
 function insertarHotel() {    
     $idHotel = $("#txtIdHotel").val();
+    $editar = $("#txtEditarHotel").val();
     $nombre = $("#txtNombreHotel").val();
     $correo = $("#txtCorreoHotel").val();
-    $editar = $("#txtEditarHotel").val();
     if (!$idHotel)$idHotel = 0;
     var url = "./ajax/ajax_hotel.php";
     if (!caracteresCorreoValido($correo, '#xmail') || $nombre.length < 1) {
@@ -138,6 +144,8 @@ function mostrarTipoHabitacion(div){
 }
 
 function registrarHabitacion(){
+    $idHotel = $("#txtIdHotel").val();
+    $editar = $("#txtEditarHotel").val();
     $habitacion=$("#txtNombreHab").val();
     $costo=$("#txtCostoHab").val();
     if($habitacion.length<1 || $costo.length<1){
@@ -154,11 +162,12 @@ function registrarHabitacion(){
                     if (datos.estado != 0) {
                         mostrarTipoHabitacion(2);
                         $idHabitacion = datos.idHabitacion;
-                        /*
+                        $("#txtNombreHab").val("");
+                        $("#txtCostoHab").val("");
                         if($editar>0){
-                            document.getElementById("TablaEmpresas").deleteRow($editar);
-                        }*/
-                        //tablaHotel($idHotel, $nombre,$correo);
+                            document.getElementById("TablaHabitaciones").deleteRow($editar);
+                        }
+                        tablaHabitacion($idHabitacion, $habitacion,$costo);
                         swal("Exito!", "El registro se almaceno correctamente.", "success");
                     } else {
                         swal("Error!", "Error al intentar crear la empresa.\nVerifique sus datos!", "warning");
@@ -166,6 +175,39 @@ function registrarHabitacion(){
                 }
             });
     }
+}
+
+/*-----------------Eliminar TipoHabitacion-------------------------*/
+function eliminarHabitacion(boton) {
+    $idHabitacion = boton.id;
+    var url = "./ajax/ajax_hotel.php";
+    swal({
+        title: "¿Estas seguro de eliminar el registro?",
+        text: "Recuerde una vez eliminados los datos no se podran recuperar",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: true
+    },
+        function () {
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {accion: 4, idHabitacion: $idHabitacion},
+                success: function (response) {
+                    var datos = JSON.parse(response);
+                    if (datos.estado != 0) {
+                        /*Eliminar registro tabla*/
+                        var i = boton.parentNode.parentNode.rowIndex;
+                        document.getElementById("TablaHabitaciones").deleteRow(i);
+                        swal("Exito!", "El registro se elimino correctamente.", "success"); 
+                    } else {
+                        swal("Error!", "Error al intentar eliminar el giro.", "warning");
+                    }
+                }
+            });
+        });
 }
 
 $(document).ready(function () {
