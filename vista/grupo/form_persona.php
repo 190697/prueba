@@ -33,7 +33,7 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                             <h4>Información de anfitrión</h4>
                                             <hr>
                                         </div>
-                                        <div class="col-lg-10">
+                                        <div class="form-group">
                                             <b>Nombre:</b>
                                             <input class="form-control"id="txtNombreP" name="txtNombreP" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/><span id="spa" name="spa"></span>
                                         </div>

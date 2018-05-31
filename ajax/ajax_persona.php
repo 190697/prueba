@@ -10,10 +10,6 @@ $accion = $_POST["accion"];
 
 switch ($accion) {
     case 1 :
-        $model->setNombre($_POST["idNombre"]);
-        $model->setApellidos($_POST["idApellidos"]);
-        $model->setCorreo($_POST["idCorreo"]);
-        $controlador->insertarPersona($model);
         $controlador->insertPerGrup();
         break;
     case 2 :
