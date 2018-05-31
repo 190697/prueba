@@ -1,5 +1,5 @@
 <?php
-//cometario prueba 2
+//cometario prueba 3
 session_start();
 if (!isset($_SESSION["id_usuario"])) {
     session_destroy();
