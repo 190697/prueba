@@ -89,7 +89,7 @@ function habitacionesHotel(boton) {
     modal3($destino,$idHotel,i);
 }
 
-/*-----------------Eliminar Empresa-------------------------*/
+/*-----------------Eliminar hotel-------------------------*/
 function eliminarHotel(boton) {
     $idHotel = boton.id;
     var url = "./ajax/ajax_hotel.php";
@@ -120,6 +120,52 @@ function eliminarHotel(boton) {
                 }
             });
         });
+}
+
+function mostrarTipoHabitacion(div){
+    if(div===1){
+        $("#agregarHab").hide();
+        $("#regresarHab").show();
+        $("#habitacionesDiv").hide();
+        $("#nuevaHabitacion").show(280);
+    }else{
+        $("#regresarHab").hide();
+        $("#agregarHab").show();
+        $("#nuevaHabitacion").hide();
+        $("#habitacionesDiv").show(280);
+    }
+    
+}
+
+function registrarHabitacion(){
+    $habitacion=$("#txtNombreHab").val();
+    $costo=$("#txtCostoHab").val();
+    if($habitacion.length<1 || $costo.length<1){
+        swal("Error!", "Se debe de llenar todos los campos.", "warning");
+    }else{
+        var url = "./ajax/ajax_hotel.php";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#nuevaHabitacion").serialize(),
+                success: function (response)
+                {
+                    var datos = JSON.parse(response);
+                    if (datos.estado != 0) {
+                        mostrarTipoHabitacion(2);
+                        $idHabitacion = datos.idHabitacion;
+                        /*
+                        if($editar>0){
+                            document.getElementById("TablaEmpresas").deleteRow($editar);
+                        }*/
+                        //tablaHotel($idHotel, $nombre,$correo);
+                        swal("Exito!", "El registro se almaceno correctamente.", "success");
+                    } else {
+                        swal("Error!", "Error al intentar crear la empresa.\nVerifique sus datos!", "warning");
+                    }
+                }
+            });
+    }
 }
 
 $(document).ready(function () {

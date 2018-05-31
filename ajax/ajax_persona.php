@@ -14,6 +14,7 @@ switch ($accion) {
         $model->setApellidos($_POST["idApellidos"]);
         $model->setCorreo($_POST["idCorreo"]);
         $controlador->insertarPersona($model);
+        $controlador->insertPerGrup();
         break;
     case 2 :
         $idFolio = $_POST["subfolio"];

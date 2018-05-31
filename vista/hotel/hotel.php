@@ -27,6 +27,7 @@ $consulta1 = $controlHoteles->listarHoteles();
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="TablaCotizacionFil">

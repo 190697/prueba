@@ -2,9 +2,11 @@
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_hotel.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/hotel.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/tipoHabitacion.php');
 
 $controlador = new ControladorHotel();
 $model = new Hotel();
+$modelHab = new TipoHabitacion();
 
 $accion = $_POST["accion"];
 
@@ -19,6 +21,11 @@ switch ($accion) {
     case 2 :
         $model ->setIdHotel($_POST["idHotel"]);
         $controlador->eliminarHotel($model);
+        break;
+    
+    case 3:
+        $modelHab->setIdTipohab($_POST["txtIdHabitacion"]);
+        $modelHab->setHotel($_POST["txtIdHabitacion"]);
         break;
 
     default :
