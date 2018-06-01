@@ -12,7 +12,7 @@ class ControladorIndex extends Conexion {
     }
 
     //-------------------Inicio----------------------------
-    public function listarCotizaciones() {
+    public function listarGrupo_Anfitrion() {
         $consulta = $this->_db->prepare("select * from grupo_anfitrion");
         return ($this->consultas($consulta));
     }

@@ -4,7 +4,7 @@ require_once('paises.php');
 $usuarios = array("Prensa", "Invitados especiales", "Grupos artísticos", "Comité organizador del festival", "Técnicos", "Personal de apoyo");
 $disciplinas = array();
 $controlIndex = new ControladorIndex();
-$consulta = $controlIndex->listarCotizaciones();
+$consulta = $controlIndex->listarGrupo_Anfitrion();
 $lista_disciplinas = $controlIndex->indexDisciplinas();
 if ($lista_disciplinas) {
     foreach ($lista_disciplinas as $row):
@@ -47,11 +47,10 @@ if ($lista_disciplinas) {
                             <tr class="info">
                                 <th>Folio</th>
                                 <th></th>
-                                <th>Grupo</th>
+                                <th>Nombre Grupo</th>
                                 <th>Anfitrion</th>
+                                <th></th>
                                 <th>Disciplina</th>
-                                <th>Pais</th>
-                                <th>Usuario</th>
                                 <th>Personas</th>
                                 <th>Clave</th>                                
                                 <th></th>
@@ -69,11 +68,14 @@ if ($lista_disciplinas) {
                                             <i class="fa fa-qrcode"></i>&nbsp;&nbsp;Subfolios
                                         </a>
                                     </td>
+                                    <td><?= $row["nGrupo"] ?></td>
                                     <td><?= $row["nombre"] ?></td>
-                                    <td><?= $row["antitrion"] ?></td>
-                                    <td><?= $disciplinas[$row["disciplina"]] ?></td>
-                                    <td><?= $paises[$row["pais"]] ?></td>
-                                    <td><?= $usuarios[$row["categoria"]] ?></td>
+                                    <td>
+                                      <a href=javascript:void(0) data-value="vista/grupo/form_estancia.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
+                                            <i class="fa fa-building"></i>&nbsp;&nbsp;Cambiar anfitrión
+                                        </a>
+                                    </td>
+                                    <td><?= $row["nombredisciplina"] ?></td>
                                     <td><?= $row["num_personas"] ?></td>
                                     <td><?= $row["clave"] ?></td>
                                     <td>
