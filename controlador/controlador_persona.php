@@ -42,6 +42,10 @@ class ControladorPersona extends Conexion {
         $contra= sha1($folio);
         $numP = addslashes(htmlspecialchars($_POST["txtNumP"]));
         $idDisciplina = addslashes(htmlspecialchars($_POST["dropDisGrupo"]));
+        if($nombreP == null || $apellido==null || $correo==null || $nombreG==null
+                ||$clave==null||$folio==null || $numP==null||$idDisciplina==null){
+            $data['estado'] = 0;
+        }else{
         try {
             $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?)");
             $statement->bindParam(1, $nombreP);
@@ -56,10 +60,12 @@ class ControladorPersona extends Conexion {
             if ($statement->execute()) {
                 $data['estado'] = 1;
             }
-            echo json_encode($data);
+            
         } catch (Exception $ex) {
             print_r($ex);
         }
+       }
+       echo json_encode($data);
     }
 
 }//hnxdkjgfxds

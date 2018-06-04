@@ -50,7 +50,7 @@
                                     foreach ($consulta as $row):
                                         ?>
                                     <tr> 
-                                        <td><?=$row["folio"]?></td>
+                                        <td><?=$row["subFolio"]?></td>
                                         <td><?=$row["fecha"]?></td>
                                         <!--<td>
                                             <a href=javascript:void(0) onclick="modal(this)">
