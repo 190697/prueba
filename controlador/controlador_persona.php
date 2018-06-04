@@ -39,6 +39,7 @@ class ControladorPersona extends Conexion {
         $nombreG = addslashes(htmlspecialchars($_POST["txtNombreG"]));
         $clave = addslashes(htmlspecialchars($_POST["txtClave"]));
         $folio = addslashes(htmlspecialchars($_POST["txtFolio"]));
+        $pais = addslashes(htmlspecialchars($_POST["dropPais"]));
         $contra= sha1($folio);
         $numP = addslashes(htmlspecialchars($_POST["txtNumP"]));
         $idDisciplina = addslashes(htmlspecialchars($_POST["dropDisGrupo"]));
@@ -47,7 +48,7 @@ class ControladorPersona extends Conexion {
             $data['estado'] = 0;
         }else{
         try {
-            $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?)");
+            $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?,?)");
             $statement->bindParam(1, $nombreP);
             $statement->bindParam(2, $apellido);
             $statement->bindParam(3, $correo);
@@ -57,6 +58,7 @@ class ControladorPersona extends Conexion {
             $statement->bindParam(7, $folio);
             $statement->bindParam(8, $contra);
             $statement->bindParam(9, $numP);
+            $statement->bindParam(10, $pais);
             if ($statement->execute()) {
                 $data['estado'] = 1;
             }

@@ -38,69 +38,7 @@ if (!$model) {
                 <input type="hidden" id="idCotizacion" name="idCotizacion" value="<?= $model[0]["idGrupo"] ?>"/>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="col-md-6">
-                            <div align="center">
-                                <h4>Información de grupo</h4>
-                                <hr>
-                            </div>
-                            <b>Nombre de grupo</b>
-                            <div class="input-group">
-                                <input class="form-control" id="txtNGrupo" name="txtNGrupo" type="text" onblur="validarInput(this)" value="<?= $model[0]["nGrupo"] ?>" />
-                                <span class="input-group-addon"  id="txtNGrupo"></span>
-                            </div>
-                            <b>Clave:</b>
-                            <div class="input-group">
-                                <input class="form-control" id="txtClave" onblur="validarInput(this)" name="txtClave" value="<?= $model[0]["clave"] ?>" type="text"  placeholder="Clave de grupo" />
-                                <span class="input-group-addon"  id="txtClaveEsp"></span>
-                            </div>
-                            <b>Folio:</b>
-                            <div class="input-group">
-                                <input class="form-control" id="txtFolio" name="txtFolio" value="<?= $model[0]["folio"] ?>"onblur="validarInput(this)" type="text" placeholder="Folio de grupo" />
-                                <span class="input-group-addon"  id="txtFolioEsp"></span>
-                            </div>
-                            <b>Número de personas:</b>
-                            <div class="input-group">
-                                <input class="form-control" id="txtNumP" name="txtNumP" onblur="validarInput(this)" value="<?= $model[0]["num_personas"] ?>"type="number" placeholder="Número de personas" />
-                                <span class="input-group-addon"  id="txtNumPEsp"></span>
-                            </div>
-                            <div class="form-group">
-                                <b>Seleccionar disciplina de grupo</b>
-                                <select class="form-control" id="dropDisGrupo" name="dropDisGrupo">
-                                    <option value=>Selecciona la disciplina..</option>
-                                    <?php
-                                    foreach ($lista_disciplinas as $row):
-                                        $disciplinas[$row['idDisciplinas']] = $row['nombre'];
-                                        if ($row['estatus'] != 0) {
-                                            ?>
-                                            <option value="<?= $row['idDisciplina'] ?>"><?= $row['nombre'] ?></option>
-                                            <?php
-                                        }
-                                        ?>
-                                    <?php endforeach ?> 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <b>Pais</b>
-                                <select class="form-control" name="dropPais" id="dropPais">
-                                    <option value=>Selecciona pais..</option>
-                                    <?php
-                                    $i = 0;
-                                    foreach ($paises as $row):
-                                        ?>
-                                        <option value="<?= $i ?>"><?= $row ?></option>
-                                        <?php
-                                        ?>
-                                        <?php
-                                        $i++;
-                                    endforeach
-                                    ?> 
-                                </select>
-                            </div>
-                            <div align="center">
-                                <button class="btn btn-info" id="guardarGiro" name="guardarGiro" onclick="actualizarGrupo()"><i class="fa fa-save"></i> Guardar</button>
-                            </div><br>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div align="center">
                                 <h4>Integrantes del grupo</h4>
                                 <hr>
@@ -135,9 +73,7 @@ if (!$model) {
                                     <td><?= $row["genero"] ?></td>
                                     <td><?= $row["correo"] ?></td>
                                     <td>
-                                        <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= 22?>" onclick="modal(this)">
-                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
-                                        </a>
+                                        ANFITRION
                                     </td>
                                 </tr>
                                 <?php }else{?>
@@ -148,7 +84,7 @@ if (!$model) {
                                     <td><?= $row["correo"] ?></td>
                                     <td>
                                         <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= 22?>" onclick="modal(this)">
-                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
+                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Asignar como anfitrion
                                         </a>
                                     </td>
                                 </tr>

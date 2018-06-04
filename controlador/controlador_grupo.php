@@ -14,7 +14,18 @@ class ControladorGrupo extends Conexion {
     //-------------------Cotizaciones----------------------------
     public function indexCotizacion($idCotizacion) {
         if ($idCotizacion > 0) {
-            $consulta = $this->_db->prepare("select * from grupo_anfitrion where idAnfitrion=" . $idCotizacion);
+            $consulta = $this->_db->prepare("select * from grupo_anfitrion where idGrupo=" . $idCotizacion);
+            return ($this->consultas($consulta));
+        }
+        return null;
+    }
+    
+    public function integrantesGrupo($idCotizacion) {
+        if ($idCotizacion > 0) {
+            $consulta = $this->_db->prepare("select per.idPersona, per.genero, per.nombre,per.apellidos
+                ,per.fotoPersona,per.correo,per.fotoIdentificacion, p.esAnfitrion
+from persona per inner join participante p on per.idPersona = p.idPersona 
+inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
             return ($this->consultas($consulta));
         }
         return null;
@@ -92,35 +103,19 @@ class ControladorGrupo extends Conexion {
     public function insertarGrupoAnfitrion($model) {
         try {
             $this->model=$model;
-            $idAnfitrion=$this->model->anfitrion->getIdAnfitrion();
-            $antifitrion=$this->model->anfitrion->getNombre();
-            $categoria=$this->model->anfitrion->getCategoria();
-            $pais=$this->model->anfitrion->getPais();
-            $disciplina=$this->model->anfitrion->getDisciplina();
+            $idGrupo = $this->model->getIdGrupo();
+            $disciplina=$this->model->getIdDisciplina();
             $grupo=$this->model->getNombre();
             $clave=$this->model->getClave();
             $folio=$this->model->getFolio();
             $numperso=$this->model->getNum_personas();
+            $pais = $this->model->getPais();
             $data['estado'] = 0;
-            if ($idAnfitrion == 0) {
-                $consulta = $this->_db->prepare("insert into anfitrion values(null,'$antifitrion',$categoria,$pais,$disciplina)");
-                if ($consulta->execute()) {
-                    $id_persona = $this->_db->lastInsertId();
-                    $query = $this->_db->prepare("insert into grupo values(null,$id_persona,'$grupo','$clave','$folio',$numperso)");
-                    if ($query->execute()) {
-                        $query = $this->_db->prepare("insert into tarjeta values(null,$id_persona,'','',0,0)");
-                        if ($query->execute()) {
-                            $data['estado'] = 1;
-                        }
-                    }
-                }
-            }else{
-                $consulta = $this->_db->prepare("update anfitrion set nombre='$antifitrion',categoria=$categoria,pais=$pais,disciplina=$disciplina where idAnfitrion=$idAnfitrion");
+                $consulta = $this->_db->prepare("update grupo set nombre='$grupo',clave='$clave',"
+                        . "pais=$pais,folio='$folio',num_personas=$numperso where idGrupo=$idGrupo");
                 if($consulta->execute()){
-                    $consulta = $this->_db->prepare("update grupo set nombre='$grupo',clave='$clave',folio='$folio',num_personas=$numperso where idAnfitrion=$idAnfitrion");
                     if($consulta->execute())$data['estado'] = 1;
-                }
-            }
+              }
         } catch (Exception $ex) {
             $data['estado'] = 0;
         }

@@ -24,6 +24,7 @@ switch ($accion) {
         $total= $_POST["total"];
         $controlador->EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,$fechaSalida,$num_habitaciones,$noches,$total);
         break;
-    
+    case 3:
+        break;
 }
 

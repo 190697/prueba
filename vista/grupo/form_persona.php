@@ -1,6 +1,7 @@
 <?php
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_persona.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_grupo.php');
+require_once('paises.php');
 $controladorGrupo = new ControladorGrupo();
 $model = $controladorGrupo->indexCotizacion($idCotizacion);
 $lista_disciplinas = $controladorGrupo->indexDisciplinas();
@@ -97,6 +98,22 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                                 <?php endforeach ?> 
                                             </select>
                                         </div>
+                                        <div class="form-group">
+                                    <b>Pais</b>
+                                    <select class="form-control" name="dropPais">
+                                        <option value=>Selecciona pais..</option>
+                                        <?php
+                                        $i=0;
+                                        foreach ($paises as $row):
+                                            ?>
+                                                <option value="<?=$i?>"><?=$row?></option>
+                                            <?php
+                                            ?>
+                                        <?php 
+                                        $i++;
+                                        endforeach ?> 
+                                    </select>
+                                </div>
                                         <!---->
                                     </div>
                                 </div>

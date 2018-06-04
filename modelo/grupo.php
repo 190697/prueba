@@ -5,17 +5,35 @@ require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/disciplina.php');
 class Grupo{
     private $idGrupo;
     public $usuario;
-    private $disciplina;
+    public $disciplina;
     private $nombre;
     private $clave;
     private $folio;
     private $num_personas;
+    private $pais;
     
     function __construct() {
         $this->usuario = new Usuario();
         $this->disciplina = new Disciplina();
     }
+    
+    function getDisciplina() {
+        return $this->disciplina;
+    }
 
+    function getPais() {
+        return $this->pais;
+    }
+
+    function setDisciplina($disciplina) {
+        $this->disciplina = $disciplina;
+    }
+
+    function setPais($pais) {
+        $this->pais = $pais;
+    }
+
+    
     function getIdGrupo() {
         return $this->idGrupo;
     }

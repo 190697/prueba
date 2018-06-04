@@ -10,15 +10,13 @@ $accion = $_POST["accion"];
 
 switch ($accion) {
     case 1 :
-        $model->anfitrion->setIdAnfitrion($_POST["idCotizacion"]);
-        $model->anfitrion->setNombre($_POST["antifitrion"]);
-        $model->anfitrion->setCategoria($_POST["categoria"]);
-        $model->anfitrion->setPais($_POST["pais"]);
-        $model->anfitrion->setDisciplina($_POST["disciplina"]);
+        $model->setIdGrupo($_POST["idCotizacion"]);
         $model->setNombre($_POST["grupo"]);
         $model->setClave($_POST["clave"]);
         $model->setFolio($_POST["folio"]);
         $model->setNum_personas($_POST["numperso"]);
+        $model->setIdDisciplina($_POST["disciplina"]);
+        $model->setPais($_POST["pais"]);
         $controlador->insertarGrupoAnfitrion($model);
         break;
     
@@ -46,7 +44,18 @@ switch ($accion) {
         $model->setIdCotizacion($_POST["idCotizacion"]);
         $controlador->eliminarCotizacion($model);
         break;
-
+    case 5:
+        $model->anfitrion->setIdAnfitrion($_POST["idCotizacion"]);
+        $model->anfitrion->setNombre($_POST["txtNGrupo"]);
+        $model->anfitrion->setCategoria($_POST["categoria"]);
+        $model->anfitrion->setPais($_POST["pais"]);
+        $model->disciplina->setIdDisciplina($_POST["pais"]);
+        $model->setNombre($_POST["grupo"]);
+        $model->setClave($_POST["clave"]);
+        $model->setFolio($_POST["folio"]);
+        $model->setNum_personas($_POST["numperso"]);
+        $controlador->insertarGrupoAnfitrion($model);
+        break;
     default :
         echo 'No se encontró la opción';
         break;

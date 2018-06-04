@@ -143,25 +143,22 @@ function insertarSubfolio() {
 
 }
 
-function insertarGrupoAnfitrion() {
+function actualizarGrupo() {
     $idCotizacion = $("#idCotizacion").val();
-    $antifitrion = $("#txtNombreA").val();
-    $grupo = $("#txtNombreGrupo").val();
-    $clave = $("#txtClaveGrup").val();
-    $folio = $("#txtFolioGrup").val();
-    $numperso = $("#txtPersonaGru").val();
-    $categoria=$("#dropCatUsuario").val();
-    $pais=$("#dropPaisUsuario").val();
-    $disciplina=$("#dropDisUsuario").val();
+    $grupo = $("#txtNGrupo").val();
+    $clave = $("#txtClave").val();
+    $folio = $("#txtFolio").val();
+    $numperso = $("#txtNumP").val();
+    $pais=$("#dropPais").val();
+    $disciplina=$("#dropDisGrupo").val();
     var url = "./ajax/ajax_grupo.php";
-    if(!$idCotizacion)$idCotizacion=0;
-    if (!$antifitrion || !$grupo || !$clave || !$folio || !$numperso || !$categoria || !$pais || !$disciplina) {
+    if ($grupo.length<0 || $clave.length<0 || $folio.length<0 || $numperso.length<0|| $pais<0 || $disciplina<0) {
         swal("Error!", "Se deben llenar todos los campos.", "warning");
     } else {
         $.ajax({
             url: url,
             type: 'post',
-            data: {accion: 1, idCotizacion: $idCotizacion, antifitrion: $antifitrion, grupo:$grupo, clave:$clave, folio:$folio, numperso:$numperso, categoria:$categoria, pais:$pais, disciplina:$disciplina},
+            data: {accion: 1, idCotizacion: $idCotizacion, grupo:$grupo, clave:$clave, folio:$folio, numperso:$numperso, pais:$pais, disciplina:$disciplina},
             success: function (response) {
                 var datos = JSON.parse(response);
                 if (datos.estado != 0) {
@@ -170,9 +167,9 @@ function insertarGrupoAnfitrion() {
                         text: "Se ha registrado correctamente.",
                         type: "success",
                         timer: 2000,
-                        showConfirmButton: false,
+                        showConfirmButton: false
                     });
-                    $("#home").click();
+                    mostrarIndex(2);
                 } else {
                     swal("Error!", "Error al intentar crear el registro.", "warning");
                 }
@@ -181,6 +178,8 @@ function insertarGrupoAnfitrion() {
     }
 
 }
+
+
 
 function eliminarCotizacion($idCotizacion){
     var url = "./ajax/ajax_grupo.php";
@@ -245,6 +244,19 @@ function caracteresCorreoValido(email, div) {
         return true;
     }
 }
+
+ function validarInput(boton,spa){
+            $id=boton.id;
+            $idS=spa;
+            if($("#"+$id).val().length == 0){
+                $("#"+$id).css("border-color","red");
+
+                $("#"+$id+"Esp").html("<span><img src='./images/incorrect.png' width='10' height='10'></span>");
+            }else{
+                $("#"+$id+"Esp").html("<span><img src='./images/correct.png' width='10' height='10'></span>");
+               $("#"+$id).css("border-color","green");
+            }
+        }
 
 //---------------------------------------------Cargar archivo al servidor-----------------------
 /*$(document).ready(function () {

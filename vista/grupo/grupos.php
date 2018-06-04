@@ -71,7 +71,7 @@ if ($lista_disciplinas) {
                                     <td><?= $row["nGrupo"] ?></td>
                                     <td><?= $row["nombre"] ?></td>
                                     <td>
-                                      <a href=javascript:void(0) data-value="vista/grupo/form_estancia.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
+                                      <a href=javascript:void(0) data-value="vista/grupo/form_cambAnf.php?idGrupo=<?= $row["idGrupo"] ?>" onclick="modal(this)">
                                             <i class="fa fa-building"></i>&nbsp;&nbsp;Cambiar anfitrión
                                         </a>
                                     </td>
@@ -84,7 +84,7 @@ if ($lista_disciplinas) {
                                         </a>
                                     </td>
                                     <td>
-                                        <a href=javascript:void(0) id="<?= $row['idAnfitrion'] ?>" onClick="editarGrupo(this)">
+                                        <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
                                             <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
                                         </a>
                                     </td>

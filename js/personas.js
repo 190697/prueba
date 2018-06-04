@@ -51,7 +51,8 @@ function insertarPersona() {
             }
         });
         }
-        
+ 
+   
         function validarInput(boton,spa){
             $id=boton.id;
             $idS=spa;

@@ -9,7 +9,7 @@ session_start();
     <?php
     if($_SESSION['tipo']==9){?>
     <li class="active">
-        <a href="#" id="home" onclick="navContent('inicio')">Inicio&nbsp;&nbsp;<i class="fa fa-home"></i></a>
+        <a href="#"  onclick="navContent('inicio')">Inicio&nbsp;&nbsp;<i class="fa fa-home"></i></a>
     </li>
     <li>
         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Personal&nbsp;&nbsp;<i class="fa fa-user"></i></a>
