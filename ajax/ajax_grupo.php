@@ -46,6 +46,11 @@ switch ($accion) {
         $model->setIdCotizacion($_POST["idCotizacion"]);
         $controlador->eliminarCotizacion($model);
         break;
+    
+    case 5:
+        $id_hotel = $_POST["id_hotel"];
+        $controlador->listarHabitacionHotel($id_hotel);
+        break;
 
     default :
         echo 'No se encontró la opción';

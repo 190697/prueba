@@ -53,6 +53,7 @@ function insertarHotel() {
     $editar = $("#txtEditarHotel").val();
     $nombre = $("#txtNombreHotel").val();
     $correo = $("#txtCorreoHotel").val();
+    $contra=$("#txtContrasenhiaHotel").val();
     if (!$idHotel)$idHotel = 0;
     var url = "./ajax/ajax_hotel.php";
     if (!caracteresCorreoValido($correo, '#xmail') || $nombre.length < 1) {
@@ -62,7 +63,7 @@ function insertarHotel() {
         $.ajax({
             url: url,
             type: 'post',
-            data: {accion: 1, idHotel:$idHotel,nombre: $nombre, correo:$correo},
+            data: {accion: 1, idHotel:$idHotel,nombre: $nombre, correo:$correo,contrasenhia:$contra},
             success: function (response) {
                 var datos = JSON.parse(response);
                 if (datos.estado != 0) {
