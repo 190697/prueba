@@ -2,17 +2,18 @@
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/hotel.php');
-require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/tipoHabitacion.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/habitacionHotel.php');
 
 class ControladorHotel extends Conexion{
     public $model;
     public $modelHab;
+    public $modelHabitacion;
 
 
     public function __construct() {
         parent::__construct();
         $this->model = new Hotel();
-        $modelHab = new TipoHabitacion();
+        $modelHab = new HabitacionHotel();
     }
 
     //-------------------Encuestas----------------------------
@@ -32,19 +33,21 @@ class ControladorHotel extends Conexion{
     }
     
     public function listarHoteles() {
-        $empresas=array();
         $consulta=$this->_db->prepare("select * from hotel where estatus=1");
         return $this->consultas($consulta);
     }
     
+    public function listarTipoHabitaciones() {
+        $consulta=$this->_db->prepare("select * from habitacion where estatus=1");
+        return $this->consultas($consulta);
+    }
+    
     public function listarHabitaciones($idHotel) {
-        $empresas=array();
-        $consulta=$this->_db->prepare("select * from tipoHabitacion where idHotel=$idHotel and estatus=1");
+        $consulta=$this->_db->prepare("select * from habitacion_hotel where idHotel=$idHotel and disponible=1");
         return $this->consultas($consulta);
     }
     
     public function listarGiros() {
-        $datos=array();
         $consulta=$this->_db->prepare("select * from giro where estatus=1");
         return $this->consultas($consulta);
     }
@@ -101,18 +104,22 @@ class ControladorHotel extends Conexion{
         echo json_encode($data);
     }
     
-    public function insertarHabitacion($model) {
+    
+    public function insertarHabitacion() {
         try {
+            /*
+            $modelHab->setIdHabitacionHotel($_POST["txtIdHabitacion"]);
+            $modelHab->hotel->setIdHotel($_POST["txtIdHotel"]);
+            $modelHab->habitacion->setIdHabitacion($_POST["txtIdHotel"]);
+             *              */
             $data['estado'] = 0;
-            $this->modelHab = $model;
-            $idHabitacion = $this->modelHab->getIdTipohab();
-            $id_hotel = $this->modelHab->hotel->getIdHotel();
-            $nombre = $this->modelHab->getNombTipo();
-            $costo = $this->modelHab->getCosto();
-            $estatus= $this->modelHab->getEstatus();
-            $query = $this->_db->prepare("insert into tipoHabitacion values(null,$id_hotel,'$nombre',$costo,$estatus)");
+            $idHabitacion = $this->modelHabitacion->getIdHabitacion();
+            $nombre = $this->modelHabitacion->getNombre();
+            $descripcion = $this->modelHabitacion->getDescripcion();
+            $estatus= $this->modelHabitacion->getEstatus();
+            $query = $this->_db->prepare("insert into habitacion values(null,'$nombre','$descripcion',$estatus)");
             if ($idHabitacion > 0) {
-                $query = $this->_db->prepare("update tipoHabitacion set nombTipo='$nombre',costo='$correo' where idTipoHab=$idHabitacion");
+                $query = $this->_db->prepare("update habitacion set nombre='$nombre',descripcion='$descripcion' where idHabitacion=$idHabitacion");
             }
             if ($query->execute()) {
                 $data['estado'] = 1;
@@ -127,12 +134,57 @@ class ControladorHotel extends Conexion{
         echo json_encode($data);
     }
     
-    public function eliminarHabitacion($model) {
+    public function insertarHabitacionHotel($model) {
+        try {
+            /*
+            $modelHab->setIdHabitacionHotel($_POST["txtIdHabitacion"]);
+            $modelHab->hotel->setIdHotel($_POST["txtIdHotel"]);
+            $modelHab->habitacion->setIdHabitacion($_POST["txtIdHotel"]);
+             *              */
+            $data['estado'] = 0;
+            $this->modelHab = $model;
+            $idHabitacion = $this->modelHab->getIdHabitacionHotel();
+            $id_hotel = $this->modelHab->hotel->getIdHotel();
+            $id_habitacion = $this->modelHab->habitacion->getIdHabitacion();
+            $costo = $this->modelHab->getCosto();
+            $estatus= $this->modelHab->getEstatus();
+            $query = $this->_db->prepare("insert into habitacionHotel values(null,$id_hotel,$id_habitacion,$costo,$estatus)");
+            if ($idHabitacion > 0) {
+                $query = $this->_db->prepare("update habitacionHotel set idHabitacion=$id_habitacion,costo='$costo' where idHabitacionHotel=$idHabitacion");
+            }
+            if ($query->execute()) {
+                $data['estado'] = 1;
+            }
+            $data['idHabitacion'] = $idHabitacion;
+            if($idHabitacion == 0){
+                $data['idHabitacion'] = $this->_db->lastInsertId();
+            }
+        } catch (Exception $ex) {
+            $data['estado'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
+    public function eliminarHabitacion() {
+        try {
+            $data['estado'] = 0;
+            $idHabitacion = $_POST["idHabitacion"];
+            $query = $this->_db->prepare("update habitacion set estatus=0 where idHabitacion=".$idHabitacion);
+            if ($query->execute()) {
+                $data['estado'] = 1;
+            }
+        } catch (Exception $ex) {
+            $data['estado'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
+    public function eliminarHabitacionHotel($model) {
         try {
             $data['estado'] = 0;
             $this->modelHab = $model;
             $idHabitacion = $_POST["idHabitacion"];
-            $query = $this->_db->prepare("update tipoHabitacion set estatus=0 where idTipoHab=".$idHabitacion);
+            $query = $this->_db->prepare("update habitacionHotel set estatus=0 where idHabitacionHotel=".$idHabitacion);
             if ($query->execute()) {
                 $data['estado'] = 1;
             }

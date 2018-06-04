@@ -134,19 +134,79 @@ function mostrarTipoHabitacion(div){
         $("#regresarHab").show();
         $("#habitacionesDiv").hide();
         $("#nuevaHabitacion").show(280);
+        $("#txtHabitacion").val("");
+        $("#txtDetalleHab").val("");
+        $("#txtEditarHabitacion").val(0);
+        $("#txtIdHabitacion").val(0);
     }else{
         $("#regresarHab").hide();
         $("#agregarHab").show();
         $("#nuevaHabitacion").hide();
         $("#habitacionesDiv").show(280);
+        
+        
+    }
+    
+}
+
+function mostrarTipoHabitacionHotel(div){
+    if(div===1){
+        $("#agregarHab").hide();
+        $("#regresarHab").show();
+        $("#habitacionesDiv").hide();
+        $("#nuevaHabitacion").show(280);
+        $("#txtNombreHab").val("");
+        $("#txtCostoHab").val("");
+        $("#txtEditarHabitacion").val(0);
+        $("#txtIdHabitacion").val(0);
+    }else{
+        $("#regresarHab").hide();
+        $("#agregarHab").show();
+        $("#nuevaHabitacion").hide();
+        $("#habitacionesDiv").show(280);
+        
+        
     }
     
 }
 
 function registrarHabitacion(){
+    $editar = $("#txtEditarHabitacion").val();
+    $habitacion=$("#txtHabitacion").val();
+    $detalle=$("#txtDetalleHab").val();
+    if($habitacion.length<1 || $detalle.length<1){
+        swal("Error!", "Se debe de llenar todos los campos.", "warning");
+    }else{
+        var url = "./ajax/ajax_hotel.php";
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: $("#nuevaHabitacion").serialize(),
+                success: function (response)
+                {
+                    var datos = JSON.parse(response);
+                    if (datos.estado != 0) {
+                        mostrarTipoHabitacion(2);
+                        $idHabitacion = datos.idHabitacion;
+                        if($editar>0){
+                            document.getElementById("TablaHabitaciones").deleteRow($editar);
+                        }
+                        $("#msjtabla").hide();
+                        tablaHabitacion($idHabitacion, $habitacion,$detalle);
+                        swal("Exito!", "El registro se almaceno correctamente.", "success");
+                    } else {
+                        swal("Error!", "Error al intentar crear el registro.\nVerifique sus datos!", "warning");
+                    }
+                }
+            });
+    }
+}
+
+function registrarHabitacionHotel(){
     $idHotel = $("#txtIdHotel").val();
-    $editar = $("#txtEditarHotel").val();
-    $habitacion=$("#txtNombreHab").val();
+    $editar = $("#txtEditarHabitacion").val();
+    $habitacion=$("#txtIdHab").val();
+    $textoHabitacion=$("#txtIdHab option:selected").text();
     $costo=$("#txtCostoHab").val();
     if($habitacion.length<1 || $costo.length<1){
         swal("Error!", "Se debe de llenar todos los campos.", "warning");
@@ -162,15 +222,14 @@ function registrarHabitacion(){
                     if (datos.estado != 0) {
                         mostrarTipoHabitacion(2);
                         $idHabitacion = datos.idHabitacion;
-                        $("#txtNombreHab").val("");
-                        $("#txtCostoHab").val("");
                         if($editar>0){
                             document.getElementById("TablaHabitaciones").deleteRow($editar);
                         }
-                        tablaHabitacion($idHabitacion, $habitacion,$costo);
+                        $("#msjtabla").hide();
+                        tablaHabitacion($idHabitacion, $textoHabitacion,("$"+$costo));
                         swal("Exito!", "El registro se almaceno correctamente.", "success");
                     } else {
-                        swal("Error!", "Error al intentar crear la empresa.\nVerifique sus datos!", "warning");
+                        swal("Error!", "Error al intentar crear crear el registro.\nVerifique sus datos!", "warning");
                     }
                 }
             });
@@ -179,6 +238,38 @@ function registrarHabitacion(){
 
 /*-----------------Eliminar TipoHabitacion-------------------------*/
 function eliminarHabitacion(boton) {
+    $idHabitacion = boton.id;
+    var url = "./ajax/ajax_hotel.php";
+    swal({
+        title: "¿Estas seguro de eliminar el registro?",
+        text: "Recuerde una vez eliminados los datos no se podran recuperar",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: true
+    },
+        function () {
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {accion: 6, idHabitacion: $idHabitacion},
+                success: function (response) {
+                    var datos = JSON.parse(response);
+                    if (datos.estado != 0) {
+                        /*Eliminar registro tabla*/
+                        var i = boton.parentNode.parentNode.rowIndex;
+                        document.getElementById("TablaHabitaciones").deleteRow(i);
+                        swal("Exito!", "El registro se elimino correctamente.", "success"); 
+                    } else {
+                        swal("Error!", "Error al intentar eliminar el giro.", "warning");
+                    }
+                }
+            });
+        });
+}
+
+function eliminarHabitacionHotel(boton) {
     $idHabitacion = boton.id;
     var url = "./ajax/ajax_hotel.php";
     swal({
@@ -209,6 +300,34 @@ function eliminarHabitacion(boton) {
             });
         });
 }
+
+function editarHabitacion(boton) {
+    var i = boton.parentNode.parentNode.rowIndex;
+    var id=boton.id;
+    var nombre=document.getElementById('TablaHabitaciones').tBodies[0].rows[(i-1)].cells[0].innerHTML;
+    var detalle=document.getElementById('TablaHabitaciones').tBodies[0].rows[(i-1)].cells[1].innerHTML;
+    mostrarTipoHabitacion(1);
+    $("#txtHabitacion").val(nombre);
+    $("#txtDetalleHab").val(detalle);
+    $("#txtEditarHabitacion").val(i);
+    $("#txtIdHabitacion").val(id);
+    
+}
+
+function editarHabitacionHotel(boton) {
+    var i = boton.parentNode.parentNode.rowIndex;
+    var id=boton.id;
+    var nombre=document.getElementById('TablaHabitaciones').tBodies[0].rows[(i-1)].cells[0].innerHTML;
+    var costo=document.getElementById('TablaHabitaciones').tBodies[0].rows[(i-1)].cells[1].innerHTML;
+    var res =parseFloat(costo.substring(1));
+    mostrarTipoHabitacionHotel(1);
+    $("#txtIdHab option["+ nombre +"]").attr("selected",true);
+    $("#txtCostoHab").val(res);
+    $("#txtEditarHabitacion").val(i);
+    $("#txtIdHabitacion").val(id);
+    
+}
+
 
 $(document).ready(function () {
     $("#txtCorreoHotel").blur(function () {
