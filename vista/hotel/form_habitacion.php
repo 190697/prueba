@@ -45,8 +45,8 @@ $consulta1 = $controlHoteles->listarHabitaciones($idHotel);
                                     ?>
                                     <tr> 
                                         <td><?= $row['nombTipo']; ?></td>
-                                        <td>$<?= number_format($row['costo'],2); ?></td>
-                                        <td><a href=javascript:void(0) id="<?= $row['idTipoHab'] ?>" class='editar' onclick="editarHotel(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
+                                        <td>$<?= $row['costo'] ?></td>
+                                        <td><a href=javascript:void(0) id="<?= $row['idTipoHab'] ?>" class='editar' onclick="editarHabitacion(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
                                         <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idTipoHab'] ?>" style='color:#FF0000;' onclick="eliminarHabitacion(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
                                         <!--
                                         <td><?php // echo $row['estatus'];      ?></td>
@@ -55,7 +55,7 @@ $consulta1 = $controlHoteles->listarHabitaciones($idHotel);
 
                                 <?php endforeach ;
                                 } else {
-                                    echo '<tr><td colspan="4"><h2><small>No existen registros almacenados</small></h2></td></tr>';
+                                    echo '<tr id="msjtabla"><td colspan="4"><h2><small>No existen registros almacenados</small></h2></td></tr>';
                                 }?> 
                         </tbody>
                     </table>
