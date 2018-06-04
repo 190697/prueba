@@ -26,6 +26,13 @@ $consulta = $controladorMeta->buscarMetaActual();
                     <?php
                 }
                 ?>
+                <?php if ($_SESSION['tipo'] == 1 || $_SESSION['tipo'] == 2) { ?>
+                    <li>
+                        <a href=javascript:void(0) id="5" class='editar' data-value="vista/hotel/form_tipoHabitacion.php" onclick="modal(this)">Tipo Habitaciones&nbsp;&nbsp;<i class="fa fa-coffee"></i></a>
+                    </li>
+                    <?php
+                }
+                ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a style="color: white;font-size:17px;font-weight: bold;"><?= $_SESSION['nombre']; ?></a></li>
