@@ -64,6 +64,14 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
         return ($this->consultas($consulta));
     }
     
+    public function listarHabitacionHotel($idHotel){
+        $statement = $this->_db->prepare("select * from habitacion_hotel where idHotel=$idHotel and disponible=1");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        $data['result'] = $result;
+        echo json_encode($data);
+    }
+    
     public function insertarSubFolio($idCotizacion,$subfolio,$grupo) {
         try {
             $data['estado'] = 0;

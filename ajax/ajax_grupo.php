@@ -56,6 +56,11 @@ switch ($accion) {
         $model->setNum_personas($_POST["numperso"]);
         $controlador->insertarGrupoAnfitrion($model);
         break;
+    
+    case 6:
+        $id_hotel = $_POST["id_hotel"];
+        $controlador->listarHabitacionHotel($id_hotel);
+        break;
     default :
         echo 'No se encontró la opción';
         break;

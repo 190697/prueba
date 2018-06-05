@@ -65,14 +65,15 @@ class ControladorHotel extends Conexion{
         return $datos;
     }
     
-    public function insertarHotel($model) {
+    public function insertarHotel($model,$contrasenhia) {
         try {
             $data['estado'] = 0;
             $this->model = $model;
             $id_hotel = $this->model->getIdHotel();
             $nombre = $this->model->getNombre();
             $correo = $this->model->getCorreo();
-            $query = $this->_db->prepare("insert into hotel values(null,'$nombre','$correo',1)");
+            $contra= sha1($contrasenhia);
+            $query = $this->_db->prepare("call usuario_hotel('$nombre','$correo','$contra')");
             if ($id_hotel > 0) {
                 $query = $this->_db->prepare("update hotel set nombre='$nombre',correo='$correo' where idHotel=$id_hotel");
             }

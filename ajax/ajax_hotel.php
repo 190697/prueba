@@ -17,7 +17,8 @@ switch ($accion) {
         $model ->setIdHotel($_POST["idHotel"]);
         $model ->setNombre($_POST["nombre"]) ;
         $model ->setCorreo($_POST["correo"]) ;
-        $controlador->insertarHotel($model);
+        $contrasenhia= $_POST["contrasenhia"];
+        $controlador->insertarHotel($model,$contrasenhia);
         break;
     
     case 2 :

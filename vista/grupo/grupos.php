@@ -19,7 +19,7 @@ if ($lista_disciplinas) {
     <script src="js/grupo.js" type="text/javascript"></script>
 </head>
 <input type="hidden" id="formUrl" name="formUrl" value="home">
-<div class="col-md-10 cont3">
+<div class="col-md-10 cont3" >
     <div align="left" class="col-md-12">
         <input class="form-control" id="myInput" type="text" placeholder="Filtrar grupo por cualquier columna..">
     </div>

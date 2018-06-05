@@ -32,7 +32,7 @@ if (!$model) {
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title text-center"><font color="white">Registrar/editar grupo</font></h4>
+                <h4 class="modal-title text-center"><font color="white">Cambio de anfitrion</font></h4>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="idCotizacion" name="idCotizacion" value="<?= $model[0]["idGrupo"] ?>"/>
@@ -73,7 +73,7 @@ if (!$model) {
                                     <td><?= $row["genero"] ?></td>
                                     <td><?= $row["correo"] ?></td>
                                     <td>
-                                        ANFITRION
+                                       <a href="#" class="btn btn-default btn-circle"><i class="fa fa-user"></i>  ANFITRION</a> 
                                     </td>
                                 </tr>
                                 <?php }else{?>
@@ -83,6 +83,7 @@ if (!$model) {
                                     <td><?= $row["genero"] ?></td>
                                     <td><?= $row["correo"] ?></td>
                                     <td>
+                                        
                                         <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= 22?>" onclick="modal(this)">
                                             <i class="fa fa-edit"></i>&nbsp;&nbsp;Asignar como anfitrion
                                         </a>

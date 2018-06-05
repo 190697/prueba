@@ -105,70 +105,28 @@ if (!$model) {
                                 <h4>Integrantes del grupo</h4>
                                 <hr>
                             </div>
-  <?php
-                if (!$lista_integrantes) {
-                    echo '<div class="text-center" style="padding-top: 60px;"><h2><small>No existen registros almacenados</small></h2></div>';
-                }else{
-                    ?><!--
-                                <div id="alertSeg" class="text-center alert-info" style="color:red;">
-                                    <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
-                                </div>-->
-                    <table id="TablaCotizaciones" class="table table-condensed table-hover">
-                        <thead>
-                            <tr class="info">
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Genero</th>
-                                <th>Correo</th>                              
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="TablaCotizacionFil">
                             <?php
-                            foreach ($lista_integrantes as $row):
-                                if($row["esAnfitrion"]==1){
-                                ?>
-                                <tr style="background: #85C1E9;"> 
-                                    <td><?= $row["nombre"] ?></td>
-                                    <td><?= $row["apellidos"] ?></td>
-                                    <td><?= $row["genero"] ?></td>
-                                    <td><?= $row["correo"] ?></td>
-                                    <td>
-                                        <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= 22?>" onclick="modal(this)">
-                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php }else{?>
-                                <tr> 
-                                    <td><?= $row["nombre"] ?></td>
-                                    <td><?= $row["apellidos"] ?></td>
-                                    <td><?= $row["genero"] ?></td>
-                                    <td><?= $row["correo"] ?></td>
-                                    <td>
-                                        <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= 22?>" onclick="modal(this)">
-                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php 
-                                }
-?>
-                            <?php endforeach ?>  
-                        </tbody>
-                        <script>
-                            $(document).ready(function () {
-                                $("#myInput").on("keyup", function () {
-                                    var value = $(this).val().toLowerCase();
-                                    $("#TablaCotizacionFil tr").filter(function () {
-                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                    });
-                                });
-                            });
-                        </script>
-                    </table>
-                <?php }?>
+                            if (!$lista_integrantes) {
+                                echo '<div class="text-center" style="padding-top: 60px;"><h2><small>No existen registros almacenados</small></h2></div>';
+                            } else {
+                                ?><!--
+                                    <div id="alertSeg" class="text-center alert-info" style="color:red;">
+                                        <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
+                                    </div>-->
+                                <div class="form-group">
+                                    <b>Seleccionar disciplina de grupo</b>
+                                    <select class="form-control" id="dropIntegr" name="dropIntegr">
+                                        <option value=>Seleccione integrante a editar..</option>
+                                        <?php
+                                        foreach ($lista_integrantes as $row):
+                                                ?>
+                                                <option value="<?= $row['idPersona']?>"><?= $row['nombre']." ".$row["apellidos"] ?></option>
+                                                <?php
+                                            ?> 
+                                        <?php endforeach ?> 
+                                    </select>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -180,11 +138,11 @@ if (!$model) {
 
     </div>
 </div>
-  <style type="text/css">
-  anfitrion {
-    color: white;
-    background-color: #d8da3d }
-  </style>
+<style type="text/css">
+    anfitrion {
+        color: white;
+        background-color: #d8da3d }
+</style>
 <script>
     $("#modalCotizacion").modal();
 </script>

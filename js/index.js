@@ -47,6 +47,10 @@ function seguimiento($id) {
             });
 }
 
+function recargarDrop(){
+    
+}
+
 function recargarGraficas() {
     var url = "ajax/ajax_inicio.php";
     $.ajax({

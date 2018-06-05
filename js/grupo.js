@@ -245,6 +245,36 @@ function caracteresCorreoValido(email, div) {
     }
 }
 
+function recargarHabitaciones() {
+    var select = document.getElementById("dropHotel"); /*Obtener el SELECT */
+    $id = $("#dropHotel").val(); /* Obtener el valor */
+    vaciarDropDown();
+    var url = "./ajax/ajax_grupo.php";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {accion: 6, id_hotel: $id},
+        success: function (response) {
+            var datos = JSON.parse(response);
+            var dropdown = document.getElementById("dropHabitacion");
+            for (var i in datos.result) {
+                var option = document.createElement("option");
+                option.id = datos.result[i].idHabitacionHotel;
+                option.text = datos.result[i].nombre+" -> $"+datos.result[i].costo;
+                dropdown.add(option);
+            }
+            $("#divHab").show();
+        }
+    });
+}
+
+function vaciarDropDown() {
+    //OBTIENE EL NÚMERO DE FILAS DE LA TABLA
+    var nFilas = $("#dropHabitacion > option").length;
+    for (var i = nFilas - 1; i > 0; i--) {
+        document.getElementById("dropHabitacion").options[i] = null;
+    }
+}
  function validarInput(boton,spa){
             $id=boton.id;
             $idS=spa;
