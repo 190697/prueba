@@ -95,10 +95,10 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
 
 
     
-    public function EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,$fechaSalida,$num_habitaciones,$noches,$total) {
+    public function EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,/*$fechaSalida,*/$num_habitaciones,$noches,$total) {
         try {
             $data['estado'] = 0;
-            $consulta = $this->_db->prepare("insert into estancia values(null,$idFolio,'$fechaEntrada','$fechaSalida',$hotel,$tarifa,$num_habitaciones,$noches,$habitacion,$total);");
+            $consulta = $this->_db->prepare("insert into estancia values(null,$hotel,$idFolio,$habitacion,'$fechaEntrada','',$num_habitaciones,$noches,$total,1);");
             if ($consulta->execute()) {
                 $data['estado'] = 1;
             }

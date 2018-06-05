@@ -24,7 +24,6 @@ function mostrarIndex(index) {
 function modal(boton) {
     $destino = boton.dataset.value;
     $("#modal").empty();
-    console.log($destino);
     $.post($destino)
             .done(function (data) {
                 $("#modal").html(data);

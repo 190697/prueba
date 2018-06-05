@@ -25,7 +25,7 @@ $consulta1 = $controlHoteles->listarTipoHabitaciones();
                         <thead>
                             <tr class="info">
                                 <th>Habitación</th>
-                                <th>Costo</th>
+                                <th>Detalle</th>
                                 <th></th>
                                 <th></th>
                             </tr>

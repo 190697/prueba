@@ -26,7 +26,7 @@ $consulta1 = $controlRestaurantes->listarRestaurantes();
                             <thead>
                                 <tr class="info">
                                     <th>Nombre</th>
-                                    <th></th>
+                                    <th>Correo/usuario</th>
                                     <th></th>
                                     <th></th>
                                 </tr>

@@ -33,11 +33,11 @@ switch ($accion) {
         $hotel = $_POST["hotel"];
         $tarifa = $_POST["tarifa"];
         $habitacion = $_POST["habitacion"];
-        $fechaSalida = $_POST["fechaSalida"];
+        /*$fechaSalida = $_POST["fechaSalida"];*/
         $num_habitaciones = $_POST["num_habitaciones"];
         $noches = $_POST["noches"];
         $total= $_POST["total"];
-        $controlador->EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,$fechaSalida,$num_habitaciones,$noches,$total);
+        $controlador->EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,/*$fechaSalida,*/$num_habitaciones,$noches,$total);
         break;
     
     case 4:

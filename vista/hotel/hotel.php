@@ -24,7 +24,7 @@ $consulta1 = $controlHoteles->listarHoteles();
                     <thead>
                         <tr class="info">
                             <th>Nombre</th>
-                            <th></th>
+                            <th>Correo/usuario</th>
                             <th></th>
                             <th></th>
                             <th></th>

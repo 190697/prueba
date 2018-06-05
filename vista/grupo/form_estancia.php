@@ -16,7 +16,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title text-center"><font color="white">Estancia por grupo</font></h4>
+                    <h4 class="modal-title text-center"><font color="white">Reservaciones por grupo</font></h4>
                 </div>
                 <div class="modal-body text-center"> 
                     <input type="hidden" id="actualizarCot" name="actualizarCot" value="<?= $_GET["idCoti"] ?>">
@@ -70,7 +70,7 @@
                                     <div class="form-group" id="divHab" style="display: none;">
                                     <b>Tipo de habitaciones:</b>
                                     <select class="form-control" id="dropHabitacion" name="dropHabitacion">
-                                        <option value=0>Selecciona la habitacion..</option>
+                                        <option value=0 costo="0">Selecciona la habitacion..</option>
                                         <?php
                                         $i=0;   
                                         foreach ($habitaciones as $row):
@@ -91,11 +91,11 @@
                                 -->
                                 <div class="form-group">
                                     <b>Numero de habitaciones</b>
-                                    <input type="number" class="form-control" id="txtHabitaciones" placeholder="1" value="" min="1">
+                                    <input type="number" class="form-control" id="txtHabitaciones" placeholder="1" value="" min="1" onkeyup="total()">
                                 </div>
                                 <div class="form-group">
                                     <b>Numero de noches</b>
-                                    <input type="number" class="form-control" id="txtNoches" placeholder="1" value="" min="1">
+                                    <input type="number" class="form-control" id="txtNoches" placeholder="1" value="" min="1" onkeyup="total()">
                                 </div>
                                 <div class="form-group">
                                     <b>Total</b>
@@ -143,11 +143,11 @@
                                             <td><?=$row["folioSubGrupo"]?></td>
                                             <td><?=$row["fechaEntrada"]?></td>
                                             <td><?=$row["fechaSalida"]?></td>
-                                            <td><?=$hoteles[$row["hotel"]]?></td>
-                                            <td><?=$row["tarifa"]?></td>
+                                            <td><?=$hoteles[$row["idHotel"]]?></td>
+                                            <td><?=$row["costo"]?></td>
                                             <td><?=$row["num_habitaciones"]?></td>
                                             <td><?=$row["num_noches"]?></td>
-                                            <td><?=$habitaciones[$row["tipo_habitacion"]]?></td>
+                                            <td><?=$row["nombre"]?></td>
                                             <td><?=$row["total"]?></td>
                                         </tr>
 

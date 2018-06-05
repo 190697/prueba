@@ -44,15 +44,15 @@ function ingresarEstancia() {
     $idFolio = $("#dropSubfolio").val();
     $fechaEntrada = $("#fechaEntrada").val();
     $hotel = $("#dropHotel").val();
-    $tarifa = $("#txtTarifa").val();
-    $habitacion = $("#dropHabitacion").val();
+    $tarifa = $("#dropHabitacion option:selected").attr("costo");
+    $habitacion = $("#dropHabitacion option:selected").attr("id");
     $fechaSalida = $("#fechaSalida").val();
     $num_habitaciones = $("#txtHabitaciones").val();
     $noches = $("#txtNoches").val();
-    $total=$noches*$num_habitaciones*$tarifa;
-    $("#txtTotal").val($total);
+    $total=$("#txtTotal").val();
+    alert("Hotel:"+$hotel+"\nHab:"+$habitacion+"\nTotal:"+$total)
     var url = "./ajax/ajax_grupo.php";
-    if (Fecha > Fecha2 ) {
+    /*if (Fecha > Fecha2 ) {
         swal({
         title: "Importante!",
         text: "La fecha de entrada debe ser menor que la de salida",
@@ -60,7 +60,8 @@ function ingresarEstancia() {
         timer: 2000,
         showConfirmButton: false,
     });
-    }else if (!$fechaEntrada || !$hotel || !$idFolio || !$tarifa || !$habitacion || !$fechaSalida || !$num_habitaciones || !$noches || !$total) {
+    }else*/ 
+    if (!$fechaEntrada.length<0 || !$hotel.length<0 || !$idFolio.length<0 || !$tarifa<0 || !$habitacion<0 /*|| !$fechaSalida*/ || !$num_habitaciones<0 || !$noches<0 || !$total<0) {
         swal({
         title: "Importante!",
         text: "Se deben llenar todos los campos",
@@ -79,7 +80,7 @@ function ingresarEstancia() {
         $.ajax({
             url: url,
             type: 'post',
-            data: {accion: 3, subfolio: $idFolio, fechaEntrada: $fechaEntrada,hotel:$hotel,tarifa:$tarifa,habitacion:$habitacion,fechaSalida:$fechaSalida,
+            data: {accion: 3, subfolio: $idFolio, fechaEntrada: $fechaEntrada,hotel:$hotel,tarifa:$tarifa,habitacion:$habitacion,/*fechaSalida:$fechaSalida,*/
                 num_habitaciones:$num_habitaciones,noches:$noches,total:$total},
             success: function (response) {
                 var datos = JSON.parse(response);
@@ -232,7 +233,6 @@ $(document).ready(function () {
 });
 
 function caracteresCorreoValido(email, div) {
-    console.log(email);
     var caract = new RegExp(/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/);
     if (caract.test(email) == false) {
         $(div).hide().removeClass('hide').slideDown('slow');
@@ -246,7 +246,6 @@ function caracteresCorreoValido(email, div) {
 }
 
 function recargarHabitaciones() {
-    var select = document.getElementById("dropHotel"); /*Obtener el SELECT */
     $id = $("#dropHotel").val(); /* Obtener el valor */
     vaciarDropDown();
     var url = "./ajax/ajax_grupo.php";
@@ -260,12 +259,29 @@ function recargarHabitaciones() {
             for (var i in datos.result) {
                 var option = document.createElement("option");
                 option.id = datos.result[i].idHabitacionHotel;
+                option.setAttribute("value",datos.result[i].costo);
+                option.setAttribute("costo",datos.result[i].costo);
                 option.text = datos.result[i].nombre+" -> $"+datos.result[i].costo;
                 dropdown.add(option);
             }
             $("#divHab").show();
         }
     });
+}
+
+function total(){
+    /*
+    var select = document.getElementById("dropHotel"); /*Obtener el SELECT 
+    $habitacion = select.options[select.selectedIndex].valueOf("costo"); 
+     */
+    $habitacion=$("#dropHabitacion option:selected").attr("costo");
+    $habitaciones=$("#txtHabitaciones").val();
+    $noches=$("#txtNoches").val();
+    if(!$habitacion)$habitacion=0;
+    if(!$habitaciones)$habitaciones=0;
+    if(!$noches)$noches=0;
+    var total=$habitacion*$habitaciones*$noches;
+    $("#txtTotal").val(total.toFixed(2));
 }
 
 function vaciarDropDown() {
