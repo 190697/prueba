@@ -29,20 +29,21 @@ session_start();
             <a href=javascript:void(0) id="1" class='editar' onclick="navContent('hotel/hotel')">Hoteles&nbsp;&nbsp;<i class="fa fa-building-o"></i></a>
         </li>
         <li>
-            <a href=javascript:void(0) id="1" class='editar' data-value="vista/restaurant/restaurant.php" onclick="modal(this)">Restaurantes&nbsp;&nbsp;<i class="fa fa-coffee"></i></a>
+            <a href=javascript:void(0) id="1" class='editar' onclick="navContent('restaurant/restaurant')">Restaurantes&nbsp;&nbsp;<i class="fa fa-coffee"></i></a>
         </li>
         <li>
-            <a href=javascript:void(0) id="1" class='editar' data-value="vista/disciplinas/disciplina.php" onclick="modal(this)">Disciplinas&nbsp;&nbsp;<i class="fa fa-cubes"></i></a>
+            <a href=javascript:void(0) id="1" class='editar' onclick="navContent('disciplinas/disciplina')">Disciplinas&nbsp;&nbsp;<i class="fa fa-cubes"></i></a>
         </li>
         <?php
     }
     ?>
-    <!--<li>
-        <a href="#" id="acot" onclick="navContent('cotizacion/cotizacion')">Cotizaciones&nbsp;&nbsp;<i class="fa fa-calculator"></i></a>
-    </li>-->
-    <li>
-        <a href="#" id="ventasid" onclick="navContent('ventas/venta')">Ventas&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i></a>
-    </li>
+    <?php if ($_SESSION['tipo'] == 7) { ?>
+        <li>
+            <a href="#" id="ventasid" onclick="navContent('ventas/venta')">Ventas&nbsp;&nbsp;<i class="fa fa-shopping-cart"></i></a>
+        </li>
+        <?php
+    }
+    ?>
 </ul>
 
 <ul class="list-unstyled CTAs">
