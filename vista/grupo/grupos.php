@@ -42,7 +42,7 @@ if ($lista_disciplinas) {
                                 <div id="alertSeg" class="text-center alert-info" style="color:red;">
                                     <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
                                 </div>-->
-                    <table id="TablaCotizaciones" class="table table-condensed table-hover table-striped">
+                    <table id="TablaEmpresas" class="table table-condensed table-striped text-center">
                         <thead>
                             <tr class="info">
                                 <th>Folio</th>
