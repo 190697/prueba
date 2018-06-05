@@ -13,7 +13,7 @@ $consulta1 = $controlRestaurantes->listarRestaurantes();
         <input class="form-control" id="myInput" type="text" placeholder="Filtrar grupo por cualquier columna..">
     </div>
     <div align="right" class="col-md-2">
-        <a href="javascript:void(0)" id="linkModal" form="vista/restaurant/form_restaurant.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo hotel</a>
+        <a href="javascript:void(0)" id="linkModal" form="vista/restaurant/form_restaurant.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo restaurant</a>
     </div>
     <br><br>
     <div class="panel panel-primary">
