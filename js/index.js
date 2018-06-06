@@ -1,3 +1,8 @@
+function enviar_tabla(id) {
+    $("#datos_a_enviar").val($("<div>").append($("#"+id).eq(0).clone()).html());
+    $("#FormularioExportacion").submit();
+}
+
 function mostrarIndex(index) {
     $destino = "vista/layout/sideBar.php";
     $.post($destino)

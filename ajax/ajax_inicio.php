@@ -32,6 +32,10 @@ switch ($accion) {
     case 6:
         $controlador->consultarSaldo();
         break;
+    
+    case 7:
+        $controlador->exportarExcel();
+        break;
 
     default :
         echo 'No se encontró la opción';

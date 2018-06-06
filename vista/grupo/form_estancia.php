@@ -19,6 +19,12 @@
                     <h4 class="modal-title text-center"><font color="white">Reservaciones por grupo</font></h4>
                 </div>
                 <div class="modal-body text-center"> 
+                    <div id="agregarHab" align="right">
+                        <a href="javascript:void(0)" onclick="mostrarTipoHabitacionHotel(1)"><i class="fa fa-plus-circle" aria-hidden="true"></i> Registrar Estancia</a><br><br>
+                    </div>
+                    <div id="regresarHab" align="right" style="display: none;">
+                        <a href="javascript:void(0)" onclick="mostrarTipoHabitacionHotel(2)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</a><br><br>
+                    </div>
                     <input type="hidden" id="actualizarCot" name="actualizarCot" value="<?= $_GET["idCoti"] ?>">
                     <div class="row">
                         <div class="col-md-12">

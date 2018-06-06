@@ -19,43 +19,48 @@ $consulta1 = $controlDisciplinas->listarDisciplinas();
     <div class="panel panel-primary">
         <div class="panel-heading text-center">Restaurantes</div>
         <div class="panel-body">
-            <div id="div_tabla_estrategias" class="col-md-12">
-                <div class="col-md-12 table-responsive panelinicio">
-                    <table id="TablaEmpresas" class="table table-condensed table-striped">
-                        <thead>
-                            <tr class="info">
-                                <th>Nombre</th>
-                                <th>descripción</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="TablaCotizacionFil">
-                            <?php
-                            if($consulta1){?>
-                            <?php
-                                foreach ($consulta1 as $row):
-                                    ?>
-                                    <tr> 
-                                        <td><?= $row['nombre']; ?></td>
-                                        <td><?= $row['descripcion']; ?></td>
-                                        <td><a href=javascript:void(0) id="<?= $row['idDisciplina'] ?>" class='editar' onclick="editarDisciplina(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
-                                        <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idDisciplina'] ?>" style='color:#FF0000;' onclick="eliminarDisciplina(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
-                                        <!--
-                                        <td><?php // echo $row['estatus'];      ?></td>
-                                        -->
-                                    </tr>
+            <form action='ajax/ajax_inicio.php' method='post' target='_blank' id='FormularioExportacion'>
+                <div id="div_tabla_estrategias" class="col-md-12">
+                    <div class="col-md-12 table-responsive panelinicio">
+                        <table id="TablaEmpresas" class="table table-condensed table-striped tablaCat">
+                            <thead>
+                                <tr class="info">
+                                    <th>Nombre</th>
+                                    <th>descripción</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="TablaCotizacionFil">
+                                <?php
+                                if($consulta1){?>
+                                <?php
+                                    foreach ($consulta1 as $row):
+                                        ?>
+                                        <tr> 
+                                            <td><?= $row['nombre']; ?></td>
+                                            <td><?= $row['descripcion']; ?></td>
+                                            <td><a href=javascript:void(0) id="<?= $row['idDisciplina'] ?>" class='editar' onclick="editarDisciplina(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
+                                            <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idDisciplina'] ?>" style='color:#FF0000;' onclick="eliminarDisciplina(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
+                                            <!--
+                                            <td><?php // echo $row['estatus'];      ?></td>
+                                            -->
+                                        </tr>
 
-                                <?php endforeach ;
-                                ?>
-                            <?php
-                            } else {
-                                echo '<div class="text-center"><h2><small>No existen registros almacenados</small></h2></div>';
-                            }?> 
-                        </tbody>
-                    </table>
+                                    <?php endforeach ;
+                                    ?>
+                                <?php
+                                } else {
+                                    echo '<div class="text-center"><h2><small>No existen registros almacenados</small></h2></div>';
+                                }?> 
+                            </tbody>
+                        </table>
+                        <input type='button' class='btn btn-success' id='botonExcel' value='Exportar a excel' onClick='enviar_tabla("TablaEmpresas")'/>
+                        <input type='hidden' id='accion' name='accion' value='7' />
+                        <input type='hidden' id='datos_a_enviar' name='datos_a_enviar' />
+                    </div>
                 </div>
-            </div>
+            </form>
             <script>
                 $(document).ready(function () {
                     $("#myInput").on("keyup", function () {
