@@ -110,9 +110,9 @@ if (!$model) {
                                 echo '<div class="text-center" style="padding-top: 60px;"><h2><small>No existen registros almacenados</small></h2></div>';
                             } else {
                                 ?><!--
-                                                    <div id="alertSeg" class="text-center alert-info" style="color:red;">
-                                                        <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
-                                                    </div>-->
+                                                        <div id="alertSeg" class="text-center alert-info" style="color:red;">
+                                                            <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
+                                                        </div>-->
                                 <div class="form-group">
                                     <center>
                                         <b>SELECCIONE INTEGRANTE A EDITAR</b>
@@ -130,28 +130,26 @@ if (!$model) {
                                 </select>
                             </div>
                             <div class="form-group" id="divHab" style="display: none;">
-                                <form enctype="multipart/form-data" class="formulario">
-                                    <input type="hidden" id="idPers" name="accion"/>
-                                    <b>Datos de integrante:</b><br>
-                                    <b>Nombre:</b>
-                                    <div class="input-group">
-                                        <input class="form-control"id="txtNombreP" name="txtNombreP" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
-                                        <span class="input-group-addon"  id="txtNombrePEsp"></span>
-                                    </div>
-                                    <b>Apellidos:</b>
-                                    <div class="input-group">
-                                        <input class="form-control"id="txtApellido" name="txtApellido" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
-                                        <span class="input-group-addon"  id="txtApellidoEsp"></span>
-                                    </div>
-                                    <b>Correo:</b>
-                                    <div class="input-group">
-                                        <input class="form-control"id="txtCorreo" name="txtApellido" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
-                                        <span class="input-group-addon"  id="txtCorreoEsp"></span>
-                                    </div><br>
-                                    <div align="center">
-                                        <button class="btn btn-warning" id="guardarGiro" name="guardarGiro" onclick="actualizarIntegrante()"><i class="fa fa-save"></i> Editar integrante</button>
-                                    </div><br>
-                                </form>
+                                <input type="hidden" id="idPers" name="accion"/>
+                                <b>Datos de integrante:</b><br>
+                                <b>Nombre:</b>
+                                <div class="input-group">
+                                    <input class="form-control"id="txtNombreP" name="txtNombreP" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
+                                    <span class="input-group-addon"  id="txtNombrePEsp"></span>
+                                </div>
+                                <b>Apellidos:</b>
+                                <div class="input-group">
+                                    <input class="form-control"id="txtApellido" name="txtApellido" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
+                                    <span class="input-group-addon"  id="txtApellidoEsp"></span>
+                                </div>
+                                <b>Correo:</b>
+                                <div class="input-group">
+                                    <input class="form-control"id="txtCorreo" name="txtApellido" type="text" placeholder="Nombre de participante" onblur="validarInput(this)"/>
+                                    <span class="input-group-addon"  id="txtCorreoEsp"></span>
+                                </div><br>
+                                <div align="center">
+                                    <button class="btn btn-warning" id="guardarGiro" name="guardarGiro" onclick="actualizarIntegrante()"><i class="fa fa-save"></i> Editar integrante</button>
+                                </div><br>
                             </div>
 
                         </div>

@@ -1,14 +1,14 @@
 function insertarMonto() {
-    $monto = $("#txtMontoMeta").val();
-    num=$monto;
+    $montoAlim = $("#txtMontoAlim").val();
+    $montoHosp = $("#txtMontoHosp").val();
     var url = "./ajax/ajax_meta.php";
-    if ($monto < 1) {
+    if ($montoAlim < 1 || $montoHosp < 1) {
         swal("Error!", "Se debe de llenar todos los campos.", "warning");
     } else {
         $.ajax({
             url: url,
             type: 'post',
-            data: {accion: 1, monto: $monto},
+            data: {accion: 1, montoAlim: $montoAlim, montoHosp: $montoHosp},
             success: function (response) {
                 var datos = JSON.parse(response);
                 if (datos.estado != 0) {
@@ -20,11 +20,11 @@ function insertarMonto() {
                         showConfirmButton: false,
                     });
                     $(".close").click();
-                    setTimeout(function(){
+                    setTimeout(function () {
                         $("#amonto").click();
                         $("#monto_meta").empty();
-                        $("#monto_meta").text("M/actual: "+num+".00");
-                    },500);
+                        $("#monto_meta").text("M/actual: " + num + ".00");
+                    }, 500);
                 } else {
                     swal("Error!", "Error al intentar crear el registro.", "warning");
                 }

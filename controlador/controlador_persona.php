@@ -1,4 +1,5 @@
 <?php
+
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/persona.php');
@@ -14,14 +15,16 @@ class ControladorPersona extends Conexion {
 
     //-------------------Cotizaciones----------------------------
 
-    public function insertarPersona($model) {
+    public function actualizarPersona($model) {
         try {
             $this->model = $model;
+            $idPerson = $this->model->getIdPersona();
             $nombre = $this->model->getNombre();
             $apellido = $this->model->getApellidos();
             $correo = $this->model->getCorreo();
             $data['estado'] = 0;
-            $consulta = $this->_db->prepare("insert into persona values(null,null,'$nombre','$apellido',null,null,null,'$correo',1);");
+            $consulta = $this->_db->prepare("update persona set nombre='$nombre',"
+                    . "apellidos ='$apellido',correo='$correo' where idPersona='$idPerson';");
             if ($consulta->execute()) {
                 $data['estado'] = 1;
             }
@@ -40,34 +43,34 @@ class ControladorPersona extends Conexion {
         $clave = addslashes(htmlspecialchars($_POST["txtClave"]));
         $folio = addslashes(htmlspecialchars($_POST["txtFolio"]));
         $pais = addslashes(htmlspecialchars($_POST["dropPais"]));
-        $contra= sha1($folio);
+        $contra = sha1($folio);
         $numP = addslashes(htmlspecialchars($_POST["txtNumP"]));
         $idDisciplina = addslashes(htmlspecialchars($_POST["dropDisGrupo"]));
-        if($nombreP == null || $apellido==null || $correo==null || $nombreG==null
-                ||$clave==null||$folio==null || $numP==null||$idDisciplina==null){
+        if ($nombreP == null || $apellido == null || $correo == null || $nombreG == null || $clave == null || $folio == null || $numP == null || $idDisciplina == null) {
             $data['estado'] = 0;
-        }else{
-        try {
-            $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?,?)");
-            $statement->bindParam(1, $nombreP);
-            $statement->bindParam(2, $apellido);
-            $statement->bindParam(3, $correo);
-            $statement->bindParam(4, $idDisciplina);
-            $statement->bindParam(5, $nombreG);
-            $statement->bindParam(6, $clave);
-            $statement->bindParam(7, $folio);
-            $statement->bindParam(8, $contra);
-            $statement->bindParam(9, $numP);
-            $statement->bindParam(10, $pais);
-            if ($statement->execute()) {
-                $data['estado'] = 1;
+        } else {
+            try {
+                $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?,?)");
+                $statement->bindParam(1, $nombreP);
+                $statement->bindParam(2, $apellido);
+                $statement->bindParam(3, $correo);
+                $statement->bindParam(4, $idDisciplina);
+                $statement->bindParam(5, $nombreG);
+                $statement->bindParam(6, $clave);
+                $statement->bindParam(7, $folio);
+                $statement->bindParam(8, $contra);
+                $statement->bindParam(9, $numP);
+                $statement->bindParam(10, $pais);
+                if ($statement->execute()) {
+                    $data['estado'] = 1;
+                }
+            } catch (Exception $ex) {
+                print_r($ex);
             }
-            
-        } catch (Exception $ex) {
-            print_r($ex);
         }
-       }
-       echo json_encode($data);
+        echo json_encode($data);
     }
 
-}//hnxdkjgfxds
+}
+
+//hnxdkjgfxds

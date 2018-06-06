@@ -21,10 +21,15 @@ switch ($accion) {
         $fechaSalida = $_POST["fechaSalida"];
         $num_habitaciones = $_POST["num_habitaciones"];
         $noches = $_POST["noches"];
-        $total= $_POST["total"];
-        $controlador->EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,$fechaSalida,$num_habitaciones,$noches,$total);
+        $total = $_POST["total"];
+        $controlador->EstanciaGrupo($idFolio, $fechaEntrada, $hotel, $tarifa, $habitacion, $fechaSalida, $num_habitaciones, $noches, $total);
         break;
     case 3:
+        $model->setIdPersona($_POST["idPerson"]);
+        $model->setNombre($_POST["nomb"]);
+        $model->setApellidos($_POST["ape"]);
+        $model->setCorreo($_POST["correo"]);
+        $controlador->actualizarPersona($model);
         break;
 }
 

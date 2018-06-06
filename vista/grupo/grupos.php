@@ -71,7 +71,7 @@ if ($lista_disciplinas) {
                                     <td><?= $row["nombre"] ?></td>
                                     <td>
                                       <a href=javascript:void(0) data-value="vista/grupo/form_cambAnf.php?idGrupo=<?= $row["idGrupo"] ?>" onclick="modal(this)">
-                                            <i class="fa fa-building"></i>&nbsp;&nbsp;Cambiar anfitrión
+                                            <i class="fa fa-group"></i>&nbsp;&nbsp;Cambiar anfitrión
                                         </a>
                                     </td>
                                     <td><?= $row["nombredisciplina"] ?></td>

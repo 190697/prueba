@@ -180,6 +180,39 @@ function actualizarGrupo() {
 
 }
 
+function actualizarIntegrante() {
+    $idPer = $("#idPers").val();
+    $nombr = $("#txtNombreP").val();
+    $apell = $("#txtApellido").val();
+    $corr = $("#txtCorreo").val();
+    var url = "./ajax/ajax_persona.php";
+    if ($idPer.length<0 || $nombr.length<0 || $apell.length<0 || $corr.length<0) {
+        swal("Error!", "Se deben llenar todos los campos.", "warning");
+    } else {
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {accion: 3, idPerson: $idPer, nomb:$nombr, ape:$apell, correo:$corr},
+            success: function (response) {
+                var datos = JSON.parse(response);
+                if (datos.estado != 0) {
+                    swal({
+                        title: "Exito!",
+                        text: "Se ha actualizado correctamente.",
+                        type: "success",
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                    mostrarIndex(2);
+                    $(".close").click();
+                } else {
+                    swal("Error!", "Error al intentar crear el registro.", "warning");
+                }
+            }
+        });
+    }
+
+}
 
 
 
@@ -279,6 +312,7 @@ function recargarIntegrantes() {
         data: {accion: 7, id_integrant: $id},
         success: function (response) {
             var datos = JSON.parse(response);
+            $("#idPers").val(datos.result[0].idPersona);
             $("#txtNombreP").val(datos.result[0].nombre);
             $("#txtApellido").val(datos.result[0].apellidos);
             $("#txtCorreo").val(datos.result[0].correo);

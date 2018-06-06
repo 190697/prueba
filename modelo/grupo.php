@@ -1,11 +1,13 @@
 <?php
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/usuario.php');
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/disciplina.php');
+require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/persona.php');
 
 class Grupo{
     private $idGrupo;
     public $usuario;
     public $disciplina;
+    public $persona;
     private $nombre;
     private $clave;
     private $folio;

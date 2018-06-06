@@ -2,7 +2,7 @@
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_meta.php');
 session_start();
 $controladorMeta = new ControladorMeta();
-$consulta = $controladorMeta->buscarMetaActual();
+$consulta = $controladorMeta->MetaActual();
 ?>
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -38,11 +38,22 @@ $consulta = $controladorMeta->buscarMetaActual();
                 <li><a style="color: white;font-size:17px;font-weight: bold;"><?= $_SESSION['nombre']; ?></a></li>
                 <?php if ($_SESSION['tipo'] == 3 || $_SESSION['tipo'] == 2) {?>
                     <li>
-                        <input type="hidden" id="fondoActual" value="<?=$consulta[0][4]?>">
-                        <a id="monto_meta" style="color: white;background-color: #EC4094;border-radius: 100px;">
+                        <input type="hidden" id="fondoActual" value="<?=$consulta[0][0]?>">
+                        <a id="monto_met" style="color: white;background-color: #EC4094;border-radius: 100px;">
                             <?php
                             if ($consulta) {
-                                if ($consulta[0][1])echo "M/actual: " . number_format($consulta[0][4], 2);
+                                if ($consulta[0][1])echo "Alimento: " . number_format($consulta[0][1]);
+                            } else {
+                                echo "Debe registrar un fondo";
+                            }
+                            ?>
+                        </a>
+                    </li>
+                     <li>
+                        <a id="monto_met" style="color: white;background-color: #EC4094;border-radius: 100px;">
+                            <?php
+                            if ($consulta) {
+                                if ($consulta[0][1])echo "Hospedaje" . number_format($consulta[0][2]);
                             } else {
                                 echo "Debe registrar un fondo";
                             }
