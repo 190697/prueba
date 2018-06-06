@@ -19,8 +19,7 @@ if ($lista_disciplinas) {
     <script src="js/grupo.js" type="text/javascript"></script>
 </head>
 <input type="hidden" id="formUrl" name="formUrl" value="home">
-<div class="col-md-10 cont3" >
-    <div align="left" class="col-md-12">
+<div align="left" class="col-md-12">
         <input class="form-control" id="myInput" type="text" placeholder="Filtrar grupo por cualquier columna..">
     </div>
     <br><br>
@@ -108,26 +107,7 @@ if ($lista_disciplinas) {
                 ?>
             </div>
         </div>
-    </div>
-</div>
-<div class="col-md-2 graficas">
-    <div align="center">
-        <img src="images/logo.png" style="width:70%"/>
-        <img src="images/logo.jpg" style="width:70%"/>
-    </div>
-    <div id="pastel" style="display: none;"></div>
-    <!--
-    <div class="panel panel-primary">
-        <div class="panel-heading">Panel with panel-primary class</div>
-        <div class="panel-body">Hola mundo...vista/inicio<br><?= getcwd() . "\n"; ?></div>
-    </div>
-    -->
-    <div id="pastel2" style="display: none;"></div>
-    <div id="pastel3" style="display: none;"></div>
-    <!--
-    <div  id="pastel2" style="min-width: 250px; height: 273px; max-width: 600px; margin: 0 auto"></div>
-    -->
-</div>    
+    </div>   
 <script>
     //recargarGraficas();
     $(".panelinicio").slideDown(700);

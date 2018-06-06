@@ -8,7 +8,7 @@ $consulta = $controladorMeta->buscarMetaActual();
     <div class="container-fluid">
         <div class="navbar-header">
             <a style="font-size: 18px;font-weight: bold;">
-                <span style="color: white;" onclick="sideBar()"><i id="sidebarCollapse" class="btn navbar-btn glyphicon glyphicon-align-left"></i>  SRA |Sistema de Registro de Asistencia&nbsp;&nbsp;</span>
+                <span style="color: white;" onclick="sideBar()"><i id="sidebarCollapse" class="btn navbar-btn glyphicon glyphicon-align-left"></i>  MG | Meeting Group&nbsp;&nbsp;</span>
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                 <span class="icon-bar"></span>
