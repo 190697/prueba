@@ -182,6 +182,7 @@ function actualizarGrupo() {
 
 
 
+
 function eliminarCotizacion($idCotizacion){
     var url = "./ajax/ajax_grupo.php";
     swal({
@@ -264,6 +265,23 @@ function recargarHabitaciones() {
                 option.text = datos.result[i].nombre+" -> $"+datos.result[i].costo;
                 dropdown.add(option);
             }
+            $("#divHab").show();
+        }
+    });
+}
+
+function recargarIntegrantes() {
+    $id = $("#dropIntegr").val(); 
+    var url = "./ajax/ajax_grupo.php";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {accion: 7, id_integrant: $id},
+        success: function (response) {
+            var datos = JSON.parse(response);
+            $("#txtNombreP").val(datos.result[0].nombre);
+            $("#txtApellido").val(datos.result[0].apellidos);
+            $("#txtCorreo").val(datos.result[0].correo);
             $("#divHab").show();
         }
     });

@@ -110,9 +110,9 @@ if (!$model) {
                                 echo '<div class="text-center" style="padding-top: 60px;"><h2><small>No existen registros almacenados</small></h2></div>';
                             } else {
                                 ?><!--
-                                                <div id="alertSeg" class="text-center alert-info" style="color:red;">
-                                                    <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
-                                                </div>-->
+                                                    <div id="alertSeg" class="text-center alert-info" style="color:red;">
+                                                        <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
+                                                    </div>-->
                                 <div class="form-group">
                                     <center>
                                         <b>SELECCIONE INTEGRANTE A EDITAR</b>
@@ -167,8 +167,10 @@ if (!$model) {
 </div>
 <style type="text/css">
     anfitrion {
-        color: white;
-        background-color: #d8da3d }
+        border-radius: 25px 25px 25px 25px;
+        -moz-border-radius: 25px 25px 25px 25px;
+        -webkit-border-radius: 25px 25px 25px 25px;
+        border: 0px solid #000000;}
 </style>
 <script>
     $("#modalCotizacion").modal();

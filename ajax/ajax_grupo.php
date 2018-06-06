@@ -61,6 +61,10 @@ switch ($accion) {
         $id_hotel = $_POST["id_hotel"];
         $controlador->listarHabitacionHotel($id_hotel);
         break;
+      case 7:
+        $id_Integra = $_POST["id_integrant"];
+        $controlador->mostrarIntegrante($id_Integra);
+        break;
     default :
         echo 'No se encontró la opción';
         break;
