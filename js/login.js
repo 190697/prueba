@@ -22,7 +22,7 @@ function login () {
                     if (data==1) {
                         $("#error3").slideDown(500);
                     }else{
-                        window.location.replace('../index.php'); 
+                        window.location.replace('../index'); 
                     }
                 }
             });

@@ -18,7 +18,7 @@ $consulta = $controladorMeta->MetaActual();
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a id="home" href="./index.php">Inicio&nbsp;&nbsp;<i class="fa fa-home"></i></a></li>
+                <li class="active"><a id="home" href="./index">Inicio&nbsp;&nbsp;<i class="fa fa-home"></i></a></li>
                     <?php if ($_SESSION['tipo'] == 3 || $_SESSION['tipo'] == 2) { ?>
                     <li>
                         <a href=javascript:void(0) id="amonto" class='editar' data-value="vista/monto_meta/monto_meta.php" onclick="modal(this)">Recurso</a>

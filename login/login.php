@@ -3,6 +3,13 @@
 header("Content-Type: text/html;charset=utf-8");
 $controlador = new ControladorEncuesta();
 $e_encuesta = $controlador->consultarEncuestas();*/
+session_start();
+if (isset($_SESSION["id_usuario"])) {
+        header("Location: ../index");
+} else{
+    session_destroy();
+}
+            
 ?>
 <!DOCTYPE html>
 <html>
