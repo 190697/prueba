@@ -26,7 +26,7 @@
                         <a href="javascript:void(0)" onclick="mostrarTipoHabitacionHotel(2)"><i class="fa fa-arrow-left" aria-hidden="true"></i> Regresar</a><br><br>
                     </div>
                     <input type="hidden" id="actualizarCot" name="actualizarCot" value="<?= $_GET["idCoti"] ?>">
-                    <div class="row">
+                    <div class="row" id="formEstancia" style="display: none;">
                         <div class="col-md-12">
                             <div class="col-md-12 form-group">
                                 <b>Folio de grupo: <?=$_GET["folio"]?></b>
@@ -44,7 +44,7 @@
                             </div>
                             <?php
                             if(!$consulta){?>
-                            <div align="center"><h2><small>No existen registros almacenados</small></h2></div>
+                            <div align="center"><h2><small>No existen subfolios almacenados</small></h2></div>
                             <?php
                             }else{?>
                                 <div class="col-md-6">
@@ -116,57 +116,69 @@
                             }?>
                         </div>
                     </div>
-                    <hr>
-                    <div class="form-group table-responsive">
+                    <div id="estancias" class="form-group table-responsive">
+                        <h3>Solicitudes de hospedaje del grupo con folio: <br><?=$_GET["folio"]?></h3>
+                        <hr>
                         <?php
-                        if($consulta){
-                            if (!$consulta2) {
-                                echo '<div class="text-center" style="padding-botom: 30px;"><h2><small>No existen estancias registradas</small></h2></div>';
-                            } else {
-                            ?>
-                                <table id="tabSubfolio" class="table table-condensed table-hover table-striped">
-                                    <thead>
-                                        <tr class="alert-info">
-                                            <th>Nº</th>
-                                            <th>SubFolio</th>
-                                            <th>Entrada</th>
-                                            <th>Salida</th>
-                                            <th>Hotel</th>
-                                            <th>Tarifa</th>
-                                            <th>Habitaciones</th>
-                                            <th>Noches</th>
-                                            <th>Habitacion</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                        $i=1;   
-                                        foreach ($consulta2 as $row):
-                                            ?>
-                                        <tr> 
-                                            <td><?=$i?></td>
-                                            <td><?=$row["folioSubGrupo"]?></td>
-                                            <td><?=$row["fechaEntrada"]?></td>
-                                            <td><?=$row["fechaSalida"]?></td>
-                                            <td><?=$hoteles[$row["idHotel"]]?></td>
-                                            <td><?=$row["costo"]?></td>
-                                            <td><?=$row["num_habitaciones"]?></td>
-                                            <td><?=$row["num_noches"]?></td>
-                                            <td><?=$row["nombre"]?></td>
-                                            <td><?=$row["total"]?></td>
-                                        </tr>
+                        if (!$consulta2) {
+                            echo '<div class="text-center" style="padding-botom: 30px;"><h2><small>No existen resgistros almacenados</small></h2></div>';
+                        } else {
+                        ?>
+                            <table id="tabSubfolio" class="table table-condensed table-hover table-striped">
+                                <thead>
+                                    <tr class="alert-info">
+                                        <th>Nº</th>
+                                        <th>SubFolio</th>
+                                        <th>Entrada</th>
+                                        <th>Salida</th>
+                                        <th>Hotel</th>
+                                        <th>Tarifa</th>
+                                        <th>Habitaciones</th>
+                                        <th>Noches</th>
+                                        <th>Habitacion</th>
+                                        <th>Total</th>
+                                        <th>Estatus</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                    $i=1;   
+                                    foreach ($consulta2 as $row):
+                                        $estatus='<i style="color:blue;" class="fa fa-clock-o" aria-hidden="true"></i>';
+                                        if($row["estatus"]==2){
+                                            $estatus='<i style="color:green;" class="fa fa-check" aria-hidden="true"></i>';
+                                        }elseif($row["estatus"]==3){
+                                            $estatus='<i style="color:red;" class="fa fa-times-circle-o" aria-hidden="true"></i>';
+                                        }
+                                        ?>
+                                    <tr> 
+                                        <td><?=$i?></td>
+                                        <td><?=$row["folioSubGrupo"]?></td>
+                                        <td><?=$row["fechaEntrada"]?></td>
+                                        <td><?=$row["fechaSalida"]?></td>
+                                        <td><?=$hoteles[$row["idHotel"]]?></td>
+                                        <td><?=$row["costo"]?></td>
+                                        <td><?=$row["num_habitaciones"]?></td>
+                                        <td><?=$row["num_noches"]?></td>
+                                        <td><?=$row["nombre"]?></td>
+                                        <td><?=$row["total"]?></td>
+                                        <td><?=$estatus?></td>
+                                        <td>
+                                            <a href=javascript:void(0) id="<?= $row['idHabitacion'] ?>" class='editar' onclick="editarHabitacion(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a>
+                                        </td>
+                                    </tr>
 
-                                        <?php 
-                                        $i++;
-                                        endforeach ?>  
-                                    </tbody>
-                            </table>
-                            <?php 
-                            }
+                                    <?php 
+                                    $i++;
+                                    endforeach ?>  
+                                </tbody>
+                        </table>
+                        <?php 
                         }
                         ?>
                     </div>
+                    <i id="SpinnPrincipal" class="fa fa-spinner fa-spin"></i>
                 </div>
                 <div id="xmail2" class="hide text-center"><h5 class="text-danger">Seleccione una opción</h5></div>
             </div>

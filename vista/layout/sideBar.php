@@ -47,4 +47,11 @@ session_start();
 </ul>
 
 <ul class="list-unstyled CTAs">
+    <?php if ($_SESSION['tipo'] == 1 || $_SESSION['tipo'] == 2) { ?>
+        <li>
+            <a href=javascript:void(0) id="1" class='editar' onclick="navContent('layout/_layout')" style="font-weight: bold;">Exportar LAYOUT&nbsp;&nbsp;<i class="fa fa-file-excel-o"></i></a>
+        </li>
+        <?php
+    }
+    ?>
 </ul>

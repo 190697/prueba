@@ -36,6 +36,40 @@ function prueba() {
     });
 }
 
+function mostrarTipoHabitacionHotel(div){
+    if(div===1){
+        $("#agregarHab").hide();
+        $("#regresarHab").show();
+        $("#estancias").hide();
+        $("#formEstancia").show(280);
+        $("#txtNombreHab").val("");
+        $("#txtCostoHab").val("");
+        $("#txtEditarHabitacion").val(0);
+        $("#txtIdHabitacion").val(0);
+    }else{
+        $("#regresarHab").hide();
+        $("#agregarHab").show();
+        $("#formEstancia").hide();
+        $("#estancias").show(280);
+        
+        
+    }
+    
+}
+
+function editarHabitacion(boton) {
+    var i = boton.parentNode.parentNode.rowIndex;
+    var id=boton.id;
+    var nombre=document.getElementById('tabSubfolio').tBodies[0].rows[(i-1)].cells[0].innerHTML;
+    var detalle=document.getElementById('tabSubfolio').tBodies[0].rows[(i-1)].cells[1].innerHTML;
+    mostrarTipoHabitacion(1);
+    $("#txtHabitacion").val(nombre);
+    $("#txtDetalleHab").val(detalle);
+    $("#txtEditarHabitacion").val(i);
+    $("#txtIdHabitacion").val(id);
+    
+}
+
 function ingresarEstancia() {
     var Fecha = new Date();
     var Fecha2 = new Date();

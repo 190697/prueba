@@ -53,7 +53,7 @@ $consulta = $controladorMeta->MetaActual();
                         <a id="monto_met" style="color: white;background-color: #EC4094;border-radius: 100px;">
                             <?php
                             if ($consulta) {
-                                if ($consulta[0][1])echo "Hospedaje" . number_format($consulta[0][2]);
+                                if ($consulta[0][1])echo "Hospedaje " . number_format($consulta[0][2]);
                             } else {
                                 echo "Debe registrar un fondo";
                             }

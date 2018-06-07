@@ -14,6 +14,7 @@ $consulta1 = $controlHoteles->listarHoteles();
     </div>
     <div align="right" class="col-md-2">
         <a href="javascript:void(0)" id="linkModal" form="vista/hotel/form_hotel.php"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nuevo hotel</a>
+        <i id="SpinnPrincipal" style="display: none;" class="fa fa-spinner fa-spin"></i>
     </div>
     <br><br>
     <div class="panel panel-primary">

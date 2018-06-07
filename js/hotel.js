@@ -13,7 +13,13 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#linkModal").click(function () {
         $destino = $("#linkModal").attr("form");
+        $("#linkModal").hide();
+        $("#SpinnPrincipal").show();
         modal3($destino,0,0);
+        setTimeout(function(){ 
+            $("#linkModal").show();
+            $("#SpinnPrincipal").hide();
+        }, 2000);
     });
 });
 

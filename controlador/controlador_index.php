@@ -12,6 +12,11 @@ class ControladorIndex extends Conexion {
     }
 
     //-------------------Inicio----------------------------
+    public function layout() {
+        $consulta = $this->_db->prepare("select * from grupo_anfitrion");
+        return ($this->consultas($consulta));
+    }
+    
     public function listarGrupo_Anfitrion() {
         $consulta = $this->_db->prepare("select * from grupo_anfitrion");
         return ($this->consultas($consulta));
