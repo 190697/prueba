@@ -28,10 +28,15 @@ function mostrarIndex(index) {
 
 function modal(boton) {
     $destino = boton.dataset.value;
+    $id=boton.id;
+    $("#"+$id).hide();
+    $("#SpinnPrincipal").show();
     $("#modal").empty();
     $.post($destino)
             .done(function (data) {
                 $("#modal").html(data);
+                $("#"+$id).show();
+                $("#SpinnPrincipal").hide();
             });
 }
 

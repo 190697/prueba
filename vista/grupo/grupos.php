@@ -24,9 +24,10 @@ if ($lista_disciplinas) {
     </div>
     <br><br>
     <div align="center" class="col-md-12">
-        <a href=javascript:void(0) class="btn btn-success" data-value="vista/grupo/form_persona.php" onclick="modal(this)">
+        <a href=javascript:void(0) id="botonGroup" class="btn btn-success" data-value="vista/grupo/form_persona.php" onclick="modal(this)">
                 <i class="fa fa-plus" aria-hidden="true"></i> Agregar anfitrion - grupo
             </a>
+        <i id="SpinnPrincipal" style="display: none;" class="fa fa-spinner fa-spin"></i>
     </div>
     <br><br>
     <div class="panel panel-primary">
