@@ -23,7 +23,7 @@ class ControladorGrupo extends Conexion {
     public function integrantesGrupo($idCotizacion) {
         if ($idCotizacion > 0) {
             $consulta = $this->_db->prepare("select per.idPersona, per.genero, per.nombre,per.apellidos
-                ,per.fotoPersona,per.correo,per.fotoIdentificacion, p.esAnfitrion
+                ,per.fotoPersona,per.correo,per.fotoIdentificacion, p.esAnfitrion,p.idParticipante
 from persona per inner join participante p on per.idPersona = p.idPersona 
 inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
             return ($this->consultas($consulta));

@@ -1,5 +1,5 @@
 function enviar_tabla(id) {
-    $("#datos_a_enviar").val($("<div>").append($("#"+id).eq(0).clone()).html());
+    $("#datos_a_enviar").val($("<div>").append($("#" + id).eq(0).clone()).html());
     $("#FormularioExportacion").submit();
 }
 
@@ -15,9 +15,9 @@ function mostrarIndex(index) {
                 $("#nav").html(data);
             });
     $destino = "vista/inicio.php";
-    if(index==1){
+    if (index == 1) {
         $destino = "vista/ventas/venta.php";
-    }else if(index==2){
+    } else if (index == 2) {
         $destino = "vista/grupo/grupos.php";
     }
     $.post($destino)
@@ -28,15 +28,15 @@ function mostrarIndex(index) {
 
 function modal(boton) {
     $destino = boton.dataset.value;
-    $id=boton.id;
-    $("#"+$id).hide();
-    $("#SpinnPrincipal").show();
+    $id = boton.id;
+    $("#" + $id).hide();
+    $("#S" + $id).show();
     $("#modal").empty();
     $.post($destino)
             .done(function (data) {
                 $("#modal").html(data);
-                $("#"+$id).show();
-                $("#SpinnPrincipal").hide();
+                $("#" + $id).show();
+                $("#S" + $id).hide();
             });
 }
 
@@ -48,7 +48,7 @@ function editarCotizacion(boton) {
 }
 
 function seguimiento($id) {
-    $destino = "vista/cotizacion/form_seguimiento.php?idCoti="+$id;
+    $destino = "vista/cotizacion/form_seguimiento.php?idCoti=" + $id;
     $("#modal").empty();
     $.post($destino)
             .done(function (data) {
@@ -56,8 +56,8 @@ function seguimiento($id) {
             });
 }
 
-function recargarDrop(){
-    
+function recargarDrop() {
+
 }
 
 function recargarGraficas() {

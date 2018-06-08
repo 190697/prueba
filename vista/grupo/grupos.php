@@ -20,95 +20,98 @@ if ($lista_disciplinas) {
 </head>
 <input type="hidden" id="formUrl" name="formUrl" value="home">
 <div align="left" class="col-md-12">
-        <input class="form-control" id="myInput" type="text" placeholder="Filtrar grupo por cualquier columna..">
-    </div>
-    <br><br>
-    <div align="center" class="col-md-12">
-        <a href=javascript:void(0) id="botonGroup" class="btn btn-success" data-value="vista/grupo/form_persona.php" onclick="modal(this)">
-                <i class="fa fa-plus" aria-hidden="true"></i> Agregar anfitrion - grupo
-            </a>
-        <i id="SpinnPrincipal" style="display: none;" class="fa fa-spinner fa-spin"></i>
-    </div>
-    <br><br>
-    <div class="panel panel-primary">
-        <div class="panel-heading text-center">Tabla de grupos</div>
-        <div class="panel-body">
-            <div class="table table-responsive panelinicio">
-                <?php
-                if (!$consulta) {
-                    echo '<div class="text-center" style="padding-top: 60px;"><h2><small>No existen registros almacenados</small></h2></div>';
-                } else {
-                    ?><!--
+    <input class="form-control" id="myInput" type="text" placeholder="Filtrar grupo por cualquier columna..">
+</div>
+<br><br>
+<div align="center" class="col-md-12">
+    <a href=javascript:void(0) id="botonGroup" class="btn btn-success" data-value="vista/grupo/form_persona.php" onclick="modal(this)">
+        <i class="fa fa-plus" aria-hidden="true"></i> Agregar anfitrion - grupo
+    </a>
+    <i id="SbotonGroup" style="display: none;" class="fa fa-spinner fa-spin"></i>
+</div>
+<br><br>
+<div class="panel panel-primary">
+    <div class="panel-heading text-center">Tabla de grupos</div>
+    <div class="panel-body">
+        <div class="table table-responsive panelinicio">
+            <?php
+            if (!$consulta) {
+                echo '<div class="text-center" style="padding-top: 60px;"><h2><small>No existen registros almacenados</small></h2></div>';
+            } else {
+                ?><!--
                                 <div id="alertSeg" class="text-center alert-info" style="color:red;">
                                     <b><i class="fa fa-info-circle"></i> Click para finalizar seguimiento</b>
                                 </div>-->
-                    <table id="TablaEmpresas" class="table table-condensed table-striped text-center">
-                        <thead>
-                            <tr class="info">
-                                <th>Folio</th>
-                                <th></th>
-                                <th>Nombre Grupo</th>
-                                <th>Anfitrion</th>
-                                <th></th>
-                                <th>Disciplina</th>
-                                <th>Personas</th>
-                                <th>Clave</th>                                
-                                <th></th>
-                                <th></th>
+                <table id="TablaEmpresas" class="table table-condensed table-striped text-center">
+                    <thead>
+                        <tr class="info">
+                            <th>Folio</th>
+                            <th></th>
+                            <th>Nombre Grupo</th>
+                            <th>Anfitrion</th>
+                            <th></th>
+                            <th>Disciplina</th>
+                            <th>Personas</th>
+                            <th>Clave</th>                                
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="TablaCotizacionFil">
+                        <?php
+                        foreach ($consulta as $row):
+                            ?>
+                            <tr> 
+                                <td><?= $row["folio"] ?></td>
+                                <td>
+                                    <a href=javascript:void(0) data-value="vista/grupo/form_subfolios.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
+                                        <i class="fa fa-qrcode"></i>&nbsp;&nbsp;Subfolios
+                                    </a>
+                                </td>
+                                <td><?= $row["nGrupo"] ?></td>
+                                <td><?= $row["nombre"] ?></td>
+                                <td>
+                                    <a href=javascript:void(0) data-value="vista/grupo/form_cambAnf.php?idGrupo=<?= $row["idGrupo"] ?>" id="btnCamb<?= $row["idGrupo"] ?>" onclick="modal(this)">
+                                        <i class="fa fa-group"></i>&nbsp;&nbsp;Cambiar anfitrión
+                                    </a>
+                                    <i id="SbtnCamb<?= $row["idGrupo"] ?>" style="display: none;" class="fa fa-spinner fa-spin"></i>
+                                </td>
+                                <td><?= $row["nombredisciplina"] ?></td>
+                                <td><?= $row["num_personas"] ?></td>
+                                <td><?= $row["clave"] ?></td>
+                                <td>
+                                    <a href=javascript:void(0) data-value="vista/grupo/form_estancia.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" id="btnEst<?= $row["idGrupo"] ?>" onclick="modal(this)">
+                                        <i class="fa fa-building"></i>&nbsp;&nbsp;Estancia
+                                    </a>
+                                     <i id="SbtnEst<?= $row["idGrupo"] ?>" style="display: none;" class="fa fa-spinner fa-spin"></i>
+                                </td>
+                                <td>
+                                    <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" id="btnEdit<?= $row["idGrupo"] ?>" onclick="modal(this)">
+                                        <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
+                                    </a>
+                                    <i id="SbtnEdit<?= $row["idGrupo"] ?>" style="display: none;" class="fa fa-spinner fa-spin"></i>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody id="TablaCotizacionFil">
-                            <?php
-                            foreach ($consulta as $row):
-                                ?>
-                                <tr> 
-                                    <td><?= $row["folio"] ?></td>
-                                    <td>
-                                        <a href=javascript:void(0) data-value="vista/grupo/form_subfolios.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
-                                            <i class="fa fa-qrcode"></i>&nbsp;&nbsp;Subfolios
-                                        </a>
-                                    </td>
-                                    <td><?= $row["nGrupo"] ?></td>
-                                    <td><?= $row["nombre"] ?></td>
-                                    <td>
-                                      <a href=javascript:void(0) data-value="vista/grupo/form_cambAnf.php?idGrupo=<?= $row["idGrupo"] ?>" onclick="modal(this)">
-                                            <i class="fa fa-group"></i>&nbsp;&nbsp;Cambiar anfitrión
-                                        </a>
-                                    </td>
-                                    <td><?= $row["nombredisciplina"] ?></td>
-                                    <td><?= $row["num_personas"] ?></td>
-                                    <td><?= $row["clave"] ?></td>
-                                    <td>
-                                        <a href=javascript:void(0) data-value="vista/grupo/form_estancia.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
-                                            <i class="fa fa-building"></i>&nbsp;&nbsp;Estancia
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href=javascript:void(0) data-value="vista/grupo/form_grupo.php?idGrupo=<?= $row["idGrupo"] ?>&folio=<?= $row["folio"] ?>" onclick="modal(this)">
-                                            <i class="fa fa-edit"></i>&nbsp;&nbsp;Editar
-                                        </a>
-                                    </td>
-                                </tr>
 
-                            <?php endforeach ?>  
-                        </tbody>
-                        <script>
-                            $(document).ready(function () {
-                                $("#myInput").on("keyup", function () {
-                                    var value = $(this).val().toLowerCase();
-                                    $("#TablaCotizacionFil tr").filter(function () {
-                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                    });
+                        <?php endforeach ?>  
+                    </tbody>
+                    <script>
+                        $(document).ready(function () {
+                            $("#myInput").on("keyup", function () {
+                                var value = $(this).val().toLowerCase();
+                                $("#TablaCotizacionFil tr").filter(function () {
+                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                                 });
                             });
-                        </script>
-                    </table>
-                    <?php
-                }
-                ?>
-            </div>
+                        });
+                    </script>
+                </table>
+                <?php
+            }
+            ?>
         </div>
-    </div>   
+    </div>
+</div>   
 <script>
     //recargarGraficas();
     $(".panelinicio").slideDown(700);

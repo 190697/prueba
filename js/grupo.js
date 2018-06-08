@@ -5,6 +5,8 @@ function editarGrupo(boton) {
     $destino = "vista/grupo/form_grupo.php";
     modal2($destino, $idCliente, i);
 }
+
+
 function telefonos(boton) {
     $idPersona = boton.id;
     $destino = "vista/clientes/form_telefono.php";
