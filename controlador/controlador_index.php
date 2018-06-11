@@ -13,7 +13,7 @@ class ControladorIndex extends Conexion {
 
     //-------------------Inicio----------------------------
     public function layout() {
-        $consulta = $this->_db->prepare("select * from grupo_anfitrion");
+        $consulta = $this->_db->prepare("select * from layout");
         return ($this->consultas($consulta));
     }
     
