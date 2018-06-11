@@ -16,27 +16,27 @@ class ControladorIndex extends Conexion {
         $consulta = $this->_db->prepare("select * from grupo_anfitrion");
         return ($this->consultas($consulta));
     }
-    
+
     public function listarGrupo_Anfitrion() {
         $consulta = $this->_db->prepare("select * from grupo_anfitrion");
         return ($this->consultas($consulta));
     }
-    
+
     public function indexDisciplinas() {
         $consulta = $this->_db->prepare("select * from disciplina");
         return ($this->consultas($consulta));
     }
-    
+
     public function indexHoteles() {
         $consulta = $this->_db->prepare("select * from hotel");
         return ($this->consultas($consulta));
     }
-    
+
     public function indexSubfolios($idGrupo) {
         $consulta = $this->_db->prepare("select * from subgrupo where idGrupo=$idGrupo");
         return ($this->consultas($consulta));
     }
-    
+
     public function indexHospedaje($idGrupo) {
         $consulta = $this->_db->prepare("select * from hospedaje where idGrupo=$idGrupo");
         return ($this->consultas($consulta));
@@ -46,7 +46,7 @@ class ControladorIndex extends Conexion {
         $consulta = $this->_db->prepare("select * from cotizacion_cliente c inner join detalle_cotizacion dc on c.idCotizacion=dc.idCotizacion where estatus=2 order by fecha asc");
         return ($this->consultas($consulta));
     }
-    
+
     public function consultas($consulta) {
         try {
             $consulta->execute();
@@ -67,19 +67,19 @@ class ControladorIndex extends Conexion {
                                             and idCotizacion in(select idCotizacion from detalle_cotizacion where fecha_respuesta=CURDATE()) group by respuesta;');
         $this->consultasAjax($consulta);
     }
-    
+
     public function graficaSemanal() {
         $consulta = $this->_db->prepare('select (case when respuesta=1 then "Correo" when respuesta=2 then "Whatsapp" when respuesta=3 then "Llamada" else "Visita" end)as prueba,count(idCotizacion) as numero from cotizacion where respuesta>0 
                                             and idCotizacion in(select idCotizacion from detalle_cotizacion where WEEKOFYEAR(fecha_respuesta)>=WEEKOFYEAR(CURDATE())) group by respuesta;');
         $this->consultasAjax($consulta);
     }
-    
+
     public function graficaMensual() {
         $consulta = $this->_db->prepare('select (case when respuesta=1 then "Correo" when respuesta=2 then "Whatsapp" when respuesta=3 then "Llamada" else "Visita" end)as prueba,count(idCotizacion) as numero from cotizacion where respuesta>0 
                                             and idCotizacion in(select idCotizacion from detalle_cotizacion where MONTH(fecha_respuesta)>=MONTH(CURDATE())) group by respuesta;');
         $this->consultasAjax($consulta);
     }
-    
+
     public function iniciarSesion() {
         $usuario = addslashes(htmlspecialchars($_POST["usrname"]));
         $contra = addslashes(htmlspecialchars($_POST["psw"]));
@@ -91,9 +91,21 @@ class ControladorIndex extends Conexion {
             echo 1;
         } else {
             foreach ($result as $row):
-                $id_usuario = $row["idUsuario"];
-                $tipo = $row["tipo"];
-                $nombre = $row["usuario"];
+                if ($row["tipo"] == 6) {
+                    $statement2 = $this->_db->prepare("select * from loginHotel where idUsuario=" . $row["idUsuario"]);
+                    $statement2->execute();
+                    $result2 = $statement2->fetchAll();
+                    foreach ($result2 as $row2):
+                        $id_usuario = $row["idUsuario"];
+                        $tipo = $row["tipo"];
+                        $nombre = $row2["nombre"];
+                    endforeach;
+                    break;
+                }else {
+                    $id_usuario = $row["idUsuario"];
+                    $tipo = $row["tipo"];
+                    $nombre = $row["usuario"];
+                }
             endforeach;
             session_start();
             $_SESSION['id_usuario'] = $id_usuario;
@@ -102,7 +114,7 @@ class ControladorIndex extends Conexion {
             echo 2;
         }
     }
-    
+
     public function consultarSaldo() {
         $tarjeta = addslashes(htmlspecialchars($_POST["txtTarjeta"]));
         $nip = addslashes(htmlspecialchars($_POST["txtNip"]));
@@ -114,11 +126,11 @@ class ControladorIndex extends Conexion {
             $data['estado'] = 1;
         } else {
             $data['estado'] = 2;
-            $data['result']=$result;
+            $data['result'] = $result;
         }
         echo json_encode($data);
     }
-    
+
     public function cerrarSesion() {
         session_start();
         if (session_destroy()) {
@@ -127,7 +139,7 @@ class ControladorIndex extends Conexion {
             echo 2;
         }
     }
-    
+
     public function consultasAjax($consulta) {
         try {
             $data['estado'] = 0;
@@ -142,7 +154,7 @@ class ControladorIndex extends Conexion {
         }
         echo json_encode($data);
     }
-    
+
     public function exportarExcel() {
         header('Content-Encoding: UTF-8');
         header("Content-type: application/vnd.ms-excel; name='excel'; charset=UTF-8");
