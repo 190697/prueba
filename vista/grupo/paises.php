@@ -14,6 +14,19 @@ $habitaciones=array(
     "Doble",
     "Triple");
 
+$categoria=array(
+    "Prensa",
+    "Invitado Especial",
+    "Grupo artistico",
+    "Comité Organizador FIC",
+    "Grupo técnico",
+    "Grupo personal de apoyo");
+
+$subcategoria=array(
+    "Local",
+    "Nacional",
+    "Internacional");
+
 $paises = array(
     "Afghanistan",
     "Albania",
