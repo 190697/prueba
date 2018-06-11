@@ -37,6 +37,11 @@ class ControladorHotel extends Conexion{
         return $this->consultas($consulta);
     }
     
+    public function listarSolicitudes($idHotel) {
+        $consulta=$this->_db->prepare("select * from layout where idHotel=$idHotel");
+        return $this->consultas($consulta);
+    }
+    
     public function listarTipoHabitaciones() {
         $consulta=$this->_db->prepare("select * from habitacion where estatus=1");
         return $this->consultas($consulta);

@@ -355,3 +355,35 @@ function caracteresCorreoValido(email, div) {
         return true;
     }
 }
+
+function respuesta(){
+    $idHabitacion = boton.id;
+    var url = "./ajax/ajax_hotel.php";
+    swal({
+        title: "¿Estas seguro de eliminar el registro?",
+        text: "Recuerde una vez eliminados los datos no se podran recuperar",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Aceptar",
+        closeOnConfirm: true
+    },
+        function () {
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {accion: 4, idHabitacion: $idHabitacion},
+                success: function (response) {
+                    var datos = JSON.parse(response);
+                    if (datos.estado != 0) {
+                        /*Eliminar registro tabla*/
+                        var i = boton.parentNode.parentNode.rowIndex;
+                        document.getElementById("TablaHabitaciones").deleteRow(i);
+                        swal("Exito!", "El registro se elimino correctamente.", "success"); 
+                    } else {
+                        swal("Error!", "Error al intentar eliminar el giro.", "warning");
+                    }
+                }
+            });
+        });
+}

@@ -20,7 +20,7 @@ function mostrarIndex(index) {
     } else if (index == 2) {
         $destino = "vista/grupo/grupos.php";
     }else if (index == 6) {
-        $destino = "vista/hotel/hotel.php";
+        $destino = "vista/hotel/_principalHotel.php";
     }
     $.post($destino)
             .done(function (data) {

@@ -39,7 +39,7 @@ $consulta1 = $controlHoteles->layout();
                             if($consulta1){
                                 foreach ($consulta1 as $row):
                                     $salida=$row['fechaSalida'];
-                                if(!$salida)$salida="Pendiente";
+                                     if(!$salida)$salida="Pendiente";
                                     ?>
                                     <tr> 
                                         <td><?= $row['pais']; ?></td>

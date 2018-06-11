@@ -81,6 +81,7 @@ class ControladorIndex extends Conexion {
     }
 
     public function iniciarSesion() {
+        $idHotel=null;
         $usuario = addslashes(htmlspecialchars($_POST["usrname"]));
         $contra = addslashes(htmlspecialchars($_POST["psw"]));
         $contrasena = sha1($contra);
@@ -99,6 +100,7 @@ class ControladorIndex extends Conexion {
                         $id_usuario = $row["idUsuario"];
                         $tipo = $row["tipo"];
                         $nombre = $row2["nombre"];
+                        $idHotel = $row2["idHotel"];
                     endforeach;
                     break;
                 }else {
@@ -111,6 +113,7 @@ class ControladorIndex extends Conexion {
             $_SESSION['id_usuario'] = $id_usuario;
             $_SESSION['tipo'] = $tipo;
             $_SESSION['nombre'] = $nombre;
+            if($idHotel)$_SESSION['idHotel'] = $idHotel;
             echo 2;
         }
     }
