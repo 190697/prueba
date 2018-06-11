@@ -62,6 +62,37 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                             <h4>Información de grupo</h4>
                                             <hr>
                                         </div>
+                                         <b>Categoria de grupo:</b>
+                                         <select class="form-control" name="dropCate" id="dropCate" onchange="recargarTipos()">
+                                        <option value=>Selecciona categoria..</option>
+                                        <?php
+                                        $i=0;
+                                        foreach ($categoria as $row):
+                                            ?>
+                                                <option value="<?=$i?>"><?=$row?></option>
+                                            <?php
+                                            ?>
+                                        <?php 
+                                        $i++;
+                                        endforeach ?> 
+                                    </select>
+                                         <div class="form-group" id="divTip" style="display: none;">
+                                             <br>
+                                              <b>Subcategoria de grupo:</b>
+                                              <select class="form-control" name="dropTipo" id="dropTipo">
+                                        <option value=>Selecciona subcategoria..</option>
+                                        <?php
+                                        $i=0;
+                                        foreach ($subcategoria as $row):
+                                            ?>
+                                                <option value="<?=$i?>"><?=$row?></option>
+                                            <?php
+                                            ?>
+                                        <?php 
+                                        $i++;
+                                        endforeach ?> 
+                                    </select>
+                                         </div>
                                         <b>Nombre de grupo:</b>
                                         <div class="input-group">
                                             <input class="form-control"id="txtNombreG" onblur="validarInput(this)" name="txtNombreG" type="text" placeholder="Nombre de grupo" />

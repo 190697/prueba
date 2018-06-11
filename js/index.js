@@ -19,6 +19,8 @@ function mostrarIndex(index) {
         $destino = "vista/ventas/venta.php";
     } else if (index == 2) {
         $destino = "vista/grupo/grupos.php";
+    }else if (index == 6) {
+        $destino = "vista/hotel/hotel.php";
     }
     $.post($destino)
             .done(function (data) {

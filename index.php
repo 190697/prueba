@@ -50,6 +50,11 @@ if (!isset($_SESSION["id_usuario"])) {
                 mostrarIndex(2);
             </script>
             <?php
+            }else if($_SESSION['tipo'] == 6){ ?>
+            <script>
+                mostrarIndex(6);
+            </script>
+            <?php
             }
         ?>
     </body>
