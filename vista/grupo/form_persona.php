@@ -64,7 +64,7 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                         </div>
                                          <b>Categoria de grupo:</b>
                                          <select class="form-control" name="dropCate" id="dropCate" onchange="recargarTipos()">
-                                        <option value=>Selecciona categoria..</option>
+                                        <option value="cat">Selecciona categoria..</option>
                                         <?php
                                         $i=0;
                                         foreach ($categoria as $row):
@@ -80,7 +80,7 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                              <br>
                                               <b>Subcategoria de grupo:</b>
                                               <select class="form-control" name="dropTipo" id="dropTipo">
-                                        <option value=>Selecciona subcategoria..</option>
+                                        <option value="op">Selecciona subcategoria..</option>
                                         <?php
                                         $i=0;
                                         foreach ($subcategoria as $row):

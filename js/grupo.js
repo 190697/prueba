@@ -341,11 +341,11 @@ function recargarHabitaciones() {
 
 function recargarTipos() {
     $id = $("#dropCate option:selected").text(); /* Obtener el valor */
-alert($id);
     if ($id == "Grupo artistico") {
         $("#divTip").show(500);
-    }else{
-        $("#divTip").hide();
+    } else {
+         $("#dropTipo").val("op");
+        $("#divTip").hide(500);
     }
 }
 

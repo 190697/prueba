@@ -3,6 +3,7 @@
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/persona.php');
+require $_SERVER['DOCUMENT_ROOT'] . '/sectur/correo/correo.php';
 
 class ControladorPersona extends Conexion {
 
@@ -39,18 +40,27 @@ class ControladorPersona extends Conexion {
         $nombreP = addslashes(htmlspecialchars($_POST["txtNombreP"]));
         $apellido = addslashes(htmlspecialchars($_POST["txtApP"]));
         $correo = addslashes(htmlspecialchars($_POST["txtCorreP"]));
+        $temCorr = $correo;
         $nombreG = addslashes(htmlspecialchars($_POST["txtNombreG"]));
         $clave = addslashes(htmlspecialchars($_POST["txtClave"]));
         $folio = addslashes(htmlspecialchars($_POST["txtFolio"]));
         $pais = addslashes(htmlspecialchars($_POST["dropPais"]));
-        $contra = sha1($folio);
+        $categoria = addslashes(htmlspecialchars($_POST["dropCate"]));
+        $subcategoria = addslashes(htmlspecialchars($_POST["dropTipo"]));
+        $tem = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+        $contra = sha1($tem);
         $numP = addslashes(htmlspecialchars($_POST["txtNumP"]));
         $idDisciplina = addslashes(htmlspecialchars($_POST["dropDisGrupo"]));
-        if ($nombreP == null || $apellido == null || $correo == null || $nombreG == null || $clave == null || $folio == null || $numP == null || $idDisciplina == null) {
+        if ($nombreP == null || $apellido == null || $correo == null ||
+                $nombreG == null || $clave == null || $folio == null ||
+                $numP == null || $idDisciplina == null || $categoria == "cat") {
             $data['estado'] = 0;
         } else {
+            if ($subcategoria == "op") {
+                $subcategoria = "0";
+            }
             try {
-                $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?,?)");
+                $statement = $this->_db->prepare("call InsertAnf_Grupo(?,?,?,?,?,?,?,?,?,?,?,?)");
                 $statement->bindParam(1, $nombreP);
                 $statement->bindParam(2, $apellido);
                 $statement->bindParam(3, $correo);
@@ -61,8 +71,14 @@ class ControladorPersona extends Conexion {
                 $statement->bindParam(8, $contra);
                 $statement->bindParam(9, $numP);
                 $statement->bindParam(10, $pais);
+                $statement->bindParam(11, $categoria);
+                $statement->bindParam(12, $subcategoria);
                 if ($statement->execute()) {
-                    $data['estado'] = 1;
+                    $correo = new correo();
+                    if ($correo->enviar($temCorr,$tem)) {
+                        $data['estado'] = 1;
+                        $tem = null;
+                    }
                 }
             } catch (Exception $ex) {
                 print_r($ex);
