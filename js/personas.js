@@ -28,8 +28,11 @@ function insertarPersona() {
         });
     }
 }
-function insertPers_grupo() {
+function insertPers_grupo(boton) {
     var url = "./ajax/ajax_persona.php";
+    $id = boton.id;
+    $("#" + $id).hide();
+    $("#S" + $id).show();
     $.ajax({
         url: url,
         type: 'post',
@@ -44,10 +47,14 @@ function insertPers_grupo() {
                     timer: 2000,
                     showConfirmButton: false,
                 });
+                $("#" + $id).show();
+                $("#S" + $id).hide();
                 mostrarIndex(2);
                 $(".close").click();
             } else {
-                swal("Error!", "Error al intentar crear el registro\nRevisa que los campos hayan quedado completos", "warning");
+                $("#" + $id).show();
+                $("#S" + $id).hide();
+                swal("Error!", "Error al intentar crear el registro\nRevisa que los campos hayan quedado completos", "error");
             }
         }
     });

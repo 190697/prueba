@@ -10,7 +10,16 @@ $accion = $_POST["accion"];
 
 switch ($accion) {
     case 1 :
-        
+        $model->setIdGrupo($_POST["idCotizacion"]);
+        $model->setCategoria($_POST["cate"]);
+        $model->setSubCategoria($_POST["subcate"]);
+        $model->setNombre($_POST["grupo"]);
+        $model->setClave($_POST["clave"]);
+        $model->setFolio($_POST["folio"]);
+        $model->setNum_personas($_POST["numperso"]);
+        $model->setIdDisciplina($_POST["disciplina"]);
+        $model->setPais($_POST["pais"]);
+        $controlador->actualizarGrupo($model);
         break;
 
     case 2 :

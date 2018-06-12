@@ -188,25 +188,35 @@ function actualizarGrupo() {
     $numperso = $("#txtNumP").val();
     $pais = $("#dropPais").val();
     $disciplina = $("#dropDisGrupo").val();
+    $cat = $("#dropCate").val();
+    $subcat = $("#dropTipo").val();
     var url = "./ajax/ajax_grupo.php";
-    if ($grupo.length < 0 || $clave.length < 0 || $folio.length < 0 || $numperso.length < 0 || $pais < 0 || $disciplina < 0) {
+    if ($grupo.length < 0 || $clave.length < 0 || $folio.length < 0 ||
+            $numperso.length < 0 || $pais < 0 || $disciplina < 0 ||
+            $cat == "cat") {
         swal("Error!", "Se deben llenar todos los campos.", "warning");
     } else {
+        if($subcat == "op"){
+            $subcat = 0;
+        }
         $.ajax({
             url: url,
             type: 'post',
-            data: {accion: 1, idCotizacion: $idCotizacion, grupo: $grupo, clave: $clave, folio: $folio, numperso: $numperso, pais: $pais, disciplina: $disciplina},
+            data: {accion: 1, idCotizacion: $idCotizacion, grupo: $grupo, clave: $clave,
+                folio: $folio, numperso: $numperso, pais: $pais, disciplina: $disciplina,
+                cate: $cat, subcate: $subcat},
             success: function (response) {
                 var datos = JSON.parse(response);
                 if (datos.estado != 0) {
                     swal({
                         title: "Exito!",
-                        text: "Se ha registrado correctamente.",
+                        text: "Se ha actualizado correctamente.",
                         type: "success",
                         timer: 2000,
-                        showConfirmButton: false
+                        showConfirmButton: false,
                     });
                     mostrarIndex(2);
+                    $("#modalCotizacion").modal('toggle');
                 } else {
                     swal("Error!", "Error al intentar crear el registro.", "warning");
                 }
@@ -344,7 +354,7 @@ function recargarTipos() {
     if ($id == "Grupo artistico") {
         $("#divTip").show(500);
     } else {
-         $("#dropTipo").val("op");
+        $("#dropTipo").val("op");
         $("#divTip").hide(500);
     }
 }

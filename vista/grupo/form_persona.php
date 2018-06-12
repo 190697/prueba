@@ -1,4 +1,5 @@
 <?php
+//
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_persona.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/controlador/controlador_grupo.php');
 require_once('paises.php');
@@ -12,7 +13,7 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
     <script src="js/personas.js" type="text/javascript"></script>
 </head>
 <div class="modal fade" id="modalCotizacion" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -62,37 +63,39 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                             <h4>Información de grupo</h4>
                                             <hr>
                                         </div>
-                                         <b>Categoria de grupo:</b>
-                                         <select class="form-control" name="dropCate" id="dropCate" onchange="recargarTipos()">
-                                        <option value="cat">Selecciona categoria..</option>
-                                        <?php
-                                        $i=0;
-                                        foreach ($categoria as $row):
-                                            ?>
-                                                <option value="<?=$i?>"><?=$row?></option>
+                                        <b>Categoria de grupo:</b>
+                                        <select class="form-control" name="dropCate" id="dropCate" onchange="recargarTipos()">
+                                            <option value="cat">Selecciona categoria..</option>
                                             <?php
-                                            ?>
-                                        <?php 
-                                        $i++;
-                                        endforeach ?> 
-                                    </select>
-                                         <div class="form-group" id="divTip" style="display: none;">
-                                             <br>
-                                              <b>Subcategoria de grupo:</b>
-                                              <select class="form-control" name="dropTipo" id="dropTipo">
-                                        <option value="op">Selecciona subcategoria..</option>
-                                        <?php
-                                        $i=0;
-                                        foreach ($subcategoria as $row):
-                                            ?>
-                                                <option value="<?=$i?>"><?=$row?></option>
-                                            <?php
-                                            ?>
-                                        <?php 
-                                        $i++;
-                                        endforeach ?> 
-                                    </select>
-                                         </div>
+                                            $i = 0;
+                                            foreach ($categoria as $row):
+                                                ?>
+                                                <option value="<?= $i ?>"><?= $row ?></option>
+                                                <?php
+                                                ?>
+                                                <?php
+                                                $i++;
+                                            endforeach
+                                            ?> 
+                                        </select>
+                                        <div class="form-group" id="divTip" style="display: none;">
+                                            <br>
+                                            <b>Subcategoria de grupo:</b>
+                                            <select class="form-control" name="dropTipo" id="dropTipo">
+                                                <option value="op">Selecciona subcategoria..</option>
+                                                <?php
+                                                $i = 0;
+                                                foreach ($subcategoria as $row):
+                                                    ?>
+                                                    <option value="<?= $i ?>"><?= $row ?></option>
+                                                    <?php
+                                                    ?>
+                                                    <?php
+                                                    $i++;
+                                                endforeach
+                                                ?> 
+                                            </select>
+                                        </div>
                                         <b>Nombre de grupo:</b>
                                         <div class="input-group">
                                             <input class="form-control"id="txtNombreG" onblur="validarInput(this)" name="txtNombreG" type="text" placeholder="Nombre de grupo" />
@@ -130,21 +133,22 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                    <b>Pais</b>
-                                    <select class="form-control" name="dropPais">
-                                        <option value=>Selecciona pais..</option>
-                                        <?php
-                                        $i=0;
-                                        foreach ($paises as $row):
-                                            ?>
-                                                <option value="<?=$i?>"><?=$row?></option>
-                                            <?php
-                                            ?>
-                                        <?php 
-                                        $i++;
-                                        endforeach ?> 
-                                    </select>
-                                </div>
+                                            <b>Pais</b>
+                                            <select class="form-control" name="dropPais">
+                                                <option value=>Selecciona pais..</option>
+                                                <?php
+                                                $i = 0;
+                                                foreach ($paises as $row):
+                                                    ?>
+                                                    <option value="<?= $i ?>"><?= $row ?></option>
+                                                    <?php
+                                                    ?>
+                                                    <?php
+                                                    $i++;
+                                                endforeach
+                                                ?> 
+                                            </select>
+                                        </div>
                                         <!---->
                                     </div>
                                 </div>
@@ -156,7 +160,10 @@ $lista_disciplinas = $controladorGrupo->indexDisciplinas();
             </div>
             <div class="alert-danger text-center" style="font-size: 11px;font-weight: bold;">Campos requeridos *</div>
             <div class="modal-footer">
-                <button class="btn btn-info" id="guardarGiro" name="guardarGiro" onclick="insertPers_grupo()"><i class="fa fa-save"></i> Guardar Relación</button>
+                <button class="btn btn-info" id="guardarGiro"  name="guardarGiro" onclick="insertPers_grupo(this)"><i class="fa fa-save"></i> Guardar Relación</button>
+                <div id="SguardarGiro" style="display: none;">
+                    <i class="fa fa-spinner fa-spin"></i><p>cargando...</p>
+                </div>
             </div>
         </div>
     </div>

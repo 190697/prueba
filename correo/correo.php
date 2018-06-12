@@ -23,9 +23,9 @@ $mail = new PHPMailer();
                     $mail->Username = 'robert15001561@gmail.com';
                     $mail->Password = '15001561';
 
-                    $mail->setFrom($correo, $correo);
+                    $mail->setFrom('FIC','FIC');
                     $mail->addAddress($correo);
-                    $mail->Subject = 'SMTP email test';
+                    $mail->Subject = 'Acceso a plataforma FIC';
                     $mail->IsHTML(true);
                     $mail->Body = '
 <!DOCTYPE html>
@@ -47,7 +47,7 @@ $mail = new PHPMailer();
 
 	<tr>
 		<td style="padding: 0">
-			<img style="padding: 0; display: block" src="http://www.mexicoescultura.com/galerias/actividades/principal/mexico_es_cultura_cervantino.png" width="100%" height="30%">
+			<img style="padding: 0; display: block" src="https://www.dirac.gob.cl/prontus_dirac/site/artic/20121003/imag/foto_0000000220121003123232.png" width="100%" height="30%">
 		</td>
 	</tr>
 	
