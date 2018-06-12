@@ -12,9 +12,8 @@
 <script src="js/SmoothScroll.js"></script>
 <script src="js/theme-scripts.js"></script>
 <link href="./images/icono.png" rel='shortcut icon' type='image/png'>
-<script src="librerias/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="librerias/sweetalert.css">
-<link rel="stylesheet" type="text/css" href="librerias/facebook.css">
+<script src="librerias/sweetalert.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
