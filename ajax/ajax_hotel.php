@@ -54,6 +54,12 @@ switch ($accion) {
         $controlador->modelHabitacion= $modelHabitacion;
         $controlador->eliminarHabitacion();
         break;
+    
+    case 7:
+        $idEstancia=$_POST["idEstancia"];
+        $estatus=$_POST["estado"];
+        $controlador->respuestaPeticion($idEstancia,$estatus);
+        break;
 
     default :
         echo 'No se encontró la opción';

@@ -2,6 +2,7 @@
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/hotel.php');
+require $_SERVER['DOCUMENT_ROOT'] . '/sectur/correo/correoHotel.php';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/habitacionHotel.php');
 
 class ControladorHotel extends Conexion{
@@ -194,6 +195,32 @@ class ControladorHotel extends Conexion{
             if ($query->execute()) {
                 $data['estado'] = 1;
             }
+        } catch (Exception $ex) {
+            $data['estado'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
+    public function respuestaPeticion($idEstancia,$estatus) {
+        try {
+            $data['estado'] = 0;
+            $query = $this->_db->prepare("update estancia set estatus=$estatus where idEstancia=".$idEstancia);
+            if ($query->execute()) {
+                $correo = new correo();
+                if ($correo->enviar($idEstancia)) {
+                    $data['estado'] = 1;
+                }
+            }
+        } catch (Exception $ex) {
+            $data['estado'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
+    public function buscarEstancia($idEstancia) {
+        try {
+            $consulta = $this->_db->prepare("select *from layout where idEstancia=".$idEstancia);
+            return($this->consultas($consulta));
         } catch (Exception $ex) {
             $data['estado'] = 0;
         }

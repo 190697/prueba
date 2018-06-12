@@ -23,6 +23,18 @@ $(document).ready(function () {
     });
 });
 
+function respuestaForm(boton){
+    $id=boton.id;
+    $destino = $("#"+$id).attr("form");
+        $("#"+$id).hide();
+        $("#SpinnPrincipa"+$id).show();
+        modal3($destino,0,0);
+        setTimeout(function(){ 
+            $("#"+$id).show();
+            $("#SpinnPrincipa"+$id).hide();
+        }, 2000);
+}
+
 function modal3($destino,$id,$editar) {
     $("#modalform").empty();
     if($id>0){
@@ -357,30 +369,65 @@ function caracteresCorreoValido(email, div) {
 }
 
 function respuesta(){
+    $idEstancia = $("#actualizarEstancia").val();
+    $estatus = $("#estado:checked").val();
     var url = "./ajax/ajax_hotel.php";
-    swal({
-            title: 'Estás seguro de borrar esto?',
-            text: 'Después no podrás recuperarlo!',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, borralo!',
-            cancelButtonText: 'Cancelar',
-            closeOnConfirm: false,
-            closeOnCancel: false
-        },
-        function(isConfirm)
-        {
-            if (isConfirm)
-            {
-                window.location = 'delete_files.php'; 
-            }else{
-              swal(
-                'Cancelado',
-                'Tu archivo está a salvo :)',
-                'error'
-              );
+    if(!$estatus){
+        swal("Selecciona alguna una opción!", "", "error");
+    }else{
+        swal({ 
+        title: "¿Responder solicitud?",
+        text: "Desea realizar este movimiento...",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2980B9",
+        confirmButtonText: "¡Aceptar!",
+        cancelButtonText: "Cancelar", 
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+        showLoaderOnCancel: true},
+
+        function(isConfirm){ 
+            if (isConfirm) {
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: {accion: 7, idEstancia: $idEstancia, estado: $estatus},
+                    success: function (response) {
+                        var datos = JSON.parse(response);
+                        if (datos.estado != 0) {
+                            /*Eliminar registro tabla*/
+                            swal({
+                                title: "Exito!",
+                                text: "La respuesta se envio correctamente.",
+                                type: "success",
+                                timer: 3000,
+                                showConfirmButton: false,
+                            });
+                            setTimeout(function(){ 
+                                location.reload();
+                            }, 3000);
+                        } else {
+                            swal("Error!", "Error al intentar enviar respuesta.", "warning");
+                        }
+                    }
+                });
             }
         });
+    }
+    /*AJAX REQUEST
+     * swal({
+        title: "Ajax request example",
+        text: "Submit to run ajax request",
+        type: "info",
+        showCancelButton: true,
+        cancelButtonText: "Rechazar",
+        cancelButtonColor: "red",
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true
+      }, function () {
+        setTimeout(function () {
+          swal("Ajax request finished!");
+        }, 2000);
+      });*/
 }
