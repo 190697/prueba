@@ -33,10 +33,6 @@ $model = $controladorHotel->indexHotel($idHotel);
                         <input class="form-control" type="text" id="txtCorreoHotel" name="txtCorreoHotel" value="<?= $model->getCorreo() ?>" placeholder="Correo de hotel">
                         <div id="xmail" class="hide"><h5 class="text-danger">Ingresa un email valido</h5></div>
                     </div>
-                    <div class="form-group text-center">
-                        <b>Contraseña:</b>
-                        <input class="form-control" type="password" id="txtContrasenhiaHotel" name="txtContrasenhiaHotel" placeholder="Correo de hotel">
-                    </div>
                 </form>
             </div>
             <div class="modal-footer">

@@ -29,6 +29,7 @@ $consulta1 = $controlHoteles->listarHoteles();
                             <th></th>
                             <th></th>
                             <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="TablaCotizacionFil">
@@ -44,8 +45,22 @@ $consulta1 = $controlHoteles->listarHoteles();
                                             <i class='fa fa-home' aria-hidden=true>&nbsp;&nbsp;Habitaciones</i>
                                         </a>
                                     </td>
-                                    <td><a href=javascript:void(0) id="<?= $row['idHotel'] ?>" class='editar' onclick="editarHotel(this)"><i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i></a></td>
-                                    <td><a href=javascript:void(0) class='eliminar' id="<?= $row['idHotel'] ?>" style='color:#FF0000;' onclick="eliminarHotel(this)"><i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i></a></td>
+                                    <td>
+                                        <a href=javascript:void(0) id="<?= $row['idHotel'] ?>" class='editar' onclick="editarHotel(this)">
+                                            <i class='fa fa-pencil' aria-hidden=true>&nbsp;&nbsp;Editar</i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href=javascript:void(0) class='eliminar' id="<?= $row['idHotel'] ?>" style='color:#FF0000;' onclick="eliminarHotel(this)">
+                                            <i class='fa fa-trash-o' aria-hidden=true>&nbsp;&nbsp;Eliminar</i>
+                                        </a>
+                                    </td>
+                                    
+                                    <td>
+                                        <a href=javascript:void(0) class='eliminar' id="<?= $row['idHotel'] ?>" style='color:#239B56;' onclick="enviarCredenciales(this)">
+                                            <i class='fa fa-envelope' aria-hidden=true>&nbsp;&nbsp;Enviar credenciales</i>
+                                        </a>
+                                    </td>
                                     <!--
                                     <td><?php // echo $row['estatus'];      ?></td>
                                     -->

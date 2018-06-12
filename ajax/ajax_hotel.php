@@ -60,6 +60,13 @@ switch ($accion) {
         $estatus=$_POST["estado"];
         $controlador->respuestaPeticion($idEstancia,$estatus);
         break;
+    
+    case 8:
+        $model ->setIdHotel($_POST["idHotel"]);
+        $model ->setNombre($_POST["nombre"]) ;
+        $model ->setCorreo($_POST["correo"]) ;
+        $controlador->enviarCredenciales($model);
+        break;
 
     default :
         echo 'No se encontró la opción';

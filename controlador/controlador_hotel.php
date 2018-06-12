@@ -2,7 +2,7 @@
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/hotel.php');
-require $_SERVER['DOCUMENT_ROOT'] . '/sectur/correo/correoHotel.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/sectur/correo/correo.php';
 require_once($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/habitacionHotel.php');
 
 class ControladorHotel extends Conexion{
@@ -78,10 +78,11 @@ class ControladorHotel extends Conexion{
             $id_hotel = $this->model->getIdHotel();
             $nombre = $this->model->getNombre();
             $correo = $this->model->getCorreo();
+            $contra=substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
             $contra= sha1($contrasenhia);
             $query = $this->_db->prepare("call usuario_hotel('$nombre','$correo','$contra')");
             if ($id_hotel > 0) {
-                $query = $this->_db->prepare("update hotel set nombre='$nombre',correo='$correo' where idHotel=$id_hotel");
+                $query = $this->_db->prepare("call editarUsuario_hotel($id_hotel,'$nombre','$correo','$contra')");
             }
             if ($query->execute()) {
                 $data['estado'] = 1;
@@ -101,7 +102,7 @@ class ControladorHotel extends Conexion{
             $data['estado'] = 0;
             $this->model = $model;
             $id_hotel = $this->model->getIdHotel();
-            $query = $this->_db->prepare("update hotel set estatus=0 where idHotel=".$id_hotel);
+            $query = $this->_db->prepare("call eliminarUsuario_hotel($id_hotel)");
             if ($query->execute()) {
                 $data['estado'] = 1;
             }
@@ -221,6 +222,31 @@ class ControladorHotel extends Conexion{
         try {
             $consulta = $this->_db->prepare("select *from layout where idEstancia=".$idEstancia);
             return($this->consultas($consulta));
+        } catch (Exception $ex) {
+            $data['estado'] = 0;
+        }
+        echo json_encode($data);
+    }
+    
+    public function enviarCredenciales($model) {
+        try {
+            $data['estado'] = 0;
+            $this->model = $model;
+            $id_hotel = $this->model->getIdHotel();
+            $nombre = $this->model->getNombre();
+            $correo = $this->model->getCorreo();
+            $tempCorreo=$correo;
+            $contra=substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+            $tempContrasenhia=$contra;
+            $contra= sha1($contra);
+            $query = $this->_db->prepare("call editarUsuario_hotel($id_hotel,'$nombre','$correo','$contra')");
+            if ($query->execute()) {
+                $correo = new correo();
+                if ($correo->enviar($tempCorreo,$tempContrasenhia)) {
+                    $data['estado'] = 1;
+                    $tem = null;
+                }
+            }
         } catch (Exception $ex) {
             $data['estado'] = 0;
         }

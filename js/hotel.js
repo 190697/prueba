@@ -71,7 +71,7 @@ function insertarHotel() {
     $editar = $("#txtEditarHotel").val();
     $nombre = $("#txtNombreHotel").val();
     $correo = $("#txtCorreoHotel").val();
-    $contra=$("#txtContrasenhiaHotel").val();
+    $contra="!454_1!.";
     if (!$idHotel)$idHotel = 0;
     var url = "./ajax/ajax_hotel.php";
     if (!caracteresCorreoValido($correo, '#xmail') || $nombre.length < 1) {
@@ -86,11 +86,16 @@ function insertarHotel() {
                 var datos = JSON.parse(response);
                 if (datos.estado != 0) {
                     $("#modalHotelform").modal('toggle');
-                    $idHotel = datos.idHotel;
-                    if($editar>0){
-                        document.getElementById("TablaEmpresas").deleteRow($editar);
-                    }
-                    tablaHotel($idHotel, $nombre,$correo);
+                    swal({
+                        title: "Exito!",
+                        text: "El registro se almaceno correctamente.",
+                        type: "success",
+                        timer: 3000,
+                        showConfirmButton: false,
+                    });
+                    setTimeout(function(){ 
+                        $("#sideHotel").click();
+                    }, 300);
                     swal("Exito!", "El registro se almaceno correctamente.", "success");
                 } else {
                     swal("Error!", "Error al intentar crear la empresa.\nVerifique sus datos!", "warning");
@@ -415,19 +420,41 @@ function respuesta(){
             }
         });
     }
-    /*AJAX REQUEST
-     * swal({
-        title: "Ajax request example",
-        text: "Submit to run ajax request",
+}
+
+function enviarCredenciales(boton) {
+    $idHotel = boton.id;
+    var i = boton.parentNode.parentNode.rowIndex;
+    var nombre=document.getElementById('TablaEmpresas').tBodies[0].rows[(i-1)].cells[0].innerHTML;
+    var correo=document.getElementById('TablaEmpresas').tBodies[0].rows[(i-1)].cells[1].innerHTML;
+    var url = "./ajax/ajax_hotel.php";
+    swal({ 
+        title: "¿Desea enviar las credenciales de acceso?",
+        text: "Confirme este movimiento",
         type: "info",
         showCancelButton: true,
-        cancelButtonText: "Rechazar",
-        cancelButtonColor: "red",
+        confirmButtonColor: "#2980B9",
+        confirmButtonText: "¡Aceptar!",
+        cancelButtonText: "Cancelar", 
         closeOnConfirm: false,
-        showLoaderOnConfirm: true
-      }, function () {
-        setTimeout(function () {
-          swal("Ajax request finished!");
-        }, 2000);
-      });*/
+        showLoaderOnConfirm: true,
+        showLoaderOnCancel: true},
+
+        function(isConfirm){ 
+            if (isConfirm) {
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: {accion: 8, idHotel:$idHotel,nombre: nombre, correo:correo},
+                    success: function (response) {
+                        var datos = JSON.parse(response);
+                        if (datos.estado != 0) {
+                            swal("Exito!", "Se enviaron las credenciales correctamente.", "success"); 
+                        } else {
+                            swal("Error!", "Error al intentar enviar las credenciales.", "warning");
+                        }
+                    }
+                });
+            }
+        });
 }
