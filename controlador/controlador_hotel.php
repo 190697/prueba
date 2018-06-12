@@ -208,7 +208,7 @@ class ControladorHotel extends Conexion{
             $query = $this->_db->prepare("update estancia set estatus=$estatus where idEstancia=".$idEstancia);
             if ($query->execute()) {
                 $correo = new correo();
-                if ($correo->enviar($idEstancia)) {
+                if ($correo->enviar2($idEstancia)) {
                     $data['estado'] = 1;
                 }
             }
