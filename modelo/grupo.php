@@ -13,13 +13,30 @@ class Grupo{
     private $folio;
     private $num_personas;
     private $pais;
+    private $categoria;
+    private $subCategoria;
     
     function __construct() {
         $this->usuario = new Usuario();
         $this->disciplina = new Disciplina();
     }
-    
-    function getDisciplina() {
+    function getCategoria() {
+        return $this->categoria;
+    }
+
+    function getSubCategoria() {
+        return $this->subCategoria;
+    }
+
+    function setCategoria($categoria) {
+        $this->categoria = $categoria;
+    }
+
+    function setSubCategoria($subCategoria) {
+        $this->subCategoria = $subCategoria;
+    }
+
+        function getDisciplina() {
         return $this->disciplina;
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 header("Content-Type: text/html;charset=utf-8");
 require_once ($_SERVER['DOCUMENT_ROOT'] . '/sectur/conexion/conexion.php');
 require ($_SERVER['DOCUMENT_ROOT'] . '/sectur/modelo/grupo.php');
@@ -11,6 +12,7 @@ class ControladorGrupo extends Conexion {
         parent::__construct();
         $this->model = new Grupo();
     }
+
     //-------------------Cotizaciones----------------------------
     public function indexCotizacion($idCotizacion) {
         if ($idCotizacion > 0) {
@@ -19,7 +21,7 @@ class ControladorGrupo extends Conexion {
         }
         return null;
     }
-    
+
     public function integrantesGrupo($idCotizacion) {
         if ($idCotizacion > 0) {
             $consulta = $this->_db->prepare("select per.idPersona, per.genero, per.nombre,per.apellidos
@@ -30,7 +32,7 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
         }
         return null;
     }
-    
+
     public function grupoAnfitrion($idCotizacion) {
         if ($idCotizacion > 0) {
             $consulta = $this->_db->prepare("select * from grupo_anfitrion where idAnfitrion=" . $idCotizacion);
@@ -38,12 +40,12 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
         }
         return null;
     }
-    
+
     public function indexDisciplinas() {
         $consulta = $this->_db->prepare("select * from disciplina");
         return ($this->consultas($consulta));
     }
-    
+
     public function consultas($consulta) {
         try {
             $consulta->execute();
@@ -58,29 +60,29 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
             echo $exc->getTraceAsString();
         }
     }
-    
-    public function listarHoteles(){
+
+    public function listarHoteles() {
         $consulta = $this->_db->prepare("select * from hotel where estatus=1");
         return ($this->consultas($consulta));
     }
-    
-    public function listarHabitacionHotel($idHotel){
+
+    public function listarHabitacionHotel($idHotel) {
         $statement = $this->_db->prepare("select * from habitacion_hotel where idHotel=$idHotel and disponible=1");
         $statement->execute();
         $result = $statement->fetchAll();
         $data['result'] = $result;
         echo json_encode($data);
     }
-    
-    public function mostrarIntegrante($idIntegrant){
+
+    public function mostrarIntegrante($idIntegrant) {
         $statement = $this->_db->prepare("select * from persona where idPersona=$idIntegrant");
         $statement->execute();
         $result = $statement->fetchAll();
         $data['result'] = $result;
         echo json_encode($data);
     }
-    
-    public function insertarSubFolio($idCotizacion,$subfolio,$grupo) {
+
+    public function insertarSubFolio($idCotizacion, $subfolio, $grupo) {
         try {
             $data['estado'] = 0;
             if ($idCotizacion == 0) {
@@ -89,9 +91,9 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
                     $data['estado'] = 1;
                     $data['subfolio'] = $this->_db->lastInsertId();
                 }
-            }else{
+            } else {
                 $consulta = $this->_db->prepare("update cotizacion set servicio='$servicio',detalle_servicio='$detalle_servicio',duracion='$duracion',num_personas=$num_personas where idCotizacion=$id");
-                if($idCotizacion->execute()){
+                if ($idCotizacion->execute()) {
                     $data['estado'] = 1;
                 }
             }
@@ -101,9 +103,7 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
         echo json_encode($data);
     }
 
-
-    
-    public function EstanciaGrupo($idFolio,$fechaEntrada,$hotel,$tarifa,$habitacion,/*$fechaSalida,*/$num_habitaciones,$noches,$total) {
+    public function EstanciaGrupo($idFolio, $fechaEntrada, $hotel, $tarifa, $habitacion, /* $fechaSalida, */ $num_habitaciones, $noches, $total) {
         try {
             $data['estado'] = 0;
             $consulta = $this->_db->prepare("insert into estancia values(null,$hotel,$idFolio,$habitacion,'$fechaEntrada','',$num_habitaciones,$noches,$total,1);");
@@ -118,20 +118,46 @@ inner join grupo g on g.idGrupo = p.idGrupo where g.idGrupo =" . $idCotizacion);
 
     public function insertarGrupoAnfitrion($model) {
         try {
-            $this->model=$model;
+            $this->model = $model;
             $idGrupo = $this->model->getIdGrupo();
-            $disciplina=$this->model->getIdDisciplina();
-            $grupo=$this->model->getNombre();
-            $clave=$this->model->getClave();
-            $folio=$this->model->getFolio();
-            $numperso=$this->model->getNum_personas();
+            $disciplina = $this->model->getIdDisciplina();
+            $grupo = $this->model->getNombre();
+            $clave = $this->model->getClave();
+            $folio = $this->model->getFolio();
+            $numperso = $this->model->getNum_personas();
             $pais = $this->model->getPais();
             $data['estado'] = 0;
-                $consulta = $this->_db->prepare("update grupo set nombre='$grupo',clave='$clave',"
-                        . "pais=$pais,folio='$folio',num_personas=$numperso where idGrupo=$idGrupo");
-                if($consulta->execute()){
-                    if($consulta->execute())$data['estado'] = 1;
-              }
+            $consulta = $this->_db->prepare("update grupo set nombre='$grupo',clave='$clave',"
+                    . "pais=$pais,folio='$folio',num_personas=$numperso where idGrupo=$idGrupo");
+            if ($consulta->execute()) {
+                if ($consulta->execute())
+                    $data['estado'] = 1;
+            }
+        } catch (Exception $ex) {
+            $data['estado'] = 0;
+        }
+        echo json_encode($data);
+    }
+
+    public function actualizarGrupo($model) {
+        try {
+            $this->model = $model;
+            $idGrupo = $this->model->getIdGrupo();
+            $disciplina = $this->model->getIdDisciplina();
+            $grupo = $this->model->getNombre();
+            $clave = $this->model->getClave();
+            $folio = $this->model->getFolio();
+            $numperso = $this->model->getNum_personas();
+            $pais = $this->model->getPais();
+            $cate = $this->model->getCategoria();
+            $subcate = $this->model->getSubCategoria();
+            $data['estado'] = 0;
+            $consulta = $this->_db->prepare("update grupo set nombre='$grupo',clave='$clave',"
+                    . "pais=$pais,folio='$folio',num_personas=$numperso,categoria=$cate"
+                    . ",tipo=$subcate where idGrupo=$idGrupo");
+            if ($consulta->execute()) {
+                $data['estado'] = 1;
+            }
         } catch (Exception $ex) {
             $data['estado'] = 0;
         }
