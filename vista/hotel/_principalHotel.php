@@ -67,9 +67,10 @@ $consulta1 = $controlHoteles->listarSolicitudes($_SESSION["idHotel"]);
                                     <td>$<?= number_format($row['total'],2); ?></td>
                                     <td><?=$estatus?></td>
                                     <td>
-                                        <a href=javascript:void(0) id="<?= $row['idHotel'] ?>" class='editar' onclick="respuesta()">
+                                        <a href=javascript:void(0) id="li<?=$i?>" form="vista/hotel/_respuestaForm.php?id=<?=$row['idEstancia'];?>&estatus=<?=$row['estatus'];?>" onclick="respuestaForm(this)">
                                             <?=$respuesta?>
                                         </a>
+                                        <i id="SpinnPrincipali<?=$i?>" style="display: none;" class="fa fa-spinner fa-spin"></i>
                                     </td>
                                 </tr>
 

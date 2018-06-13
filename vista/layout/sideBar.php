@@ -28,7 +28,7 @@ session_start();
         ?>
         <?php if ($_SESSION['tipo'] == 1 || $_SESSION['tipo'] == 2) { ?>
             <li>
-                <a href=javascript:void(0) id="1" class='editar' onclick="navContent('hotel/hotel')">Hoteles&nbsp;&nbsp;<i class="fa fa-building-o"></i></a>
+                <a href=javascript:void(0) id="sideHotel" class='editar' onclick="navContent('hotel/hotel')">Hoteles&nbsp;&nbsp;<i class="fa fa-building-o"></i></a>
             </li>
             <li>
                 <a href=javascript:void(0) id="1" class='editar' onclick="navContent('restaurant/restaurant')">Restaurantes&nbsp;&nbsp;<i class="fa fa-coffee"></i></a>
